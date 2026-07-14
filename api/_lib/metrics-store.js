@@ -4,6 +4,7 @@ const DEFAULT_LIMIT = 5000;
 function getRedisConfig() {
   const url =
     process.env.KV_REST_API_URL ||
+    process.env.UPSTASH_REDIS_REST_KV_REST_API_URL ||
     process.env.UPSTASH_REDIS_REST_URL ||
     process.env.UPSTASH_REDIS_REST_REST_URL ||
     process.env.STORAGE_REST_URL ||
@@ -11,6 +12,7 @@ function getRedisConfig() {
     process.env.REDIS_REST_URL;
   const token =
     process.env.KV_REST_API_TOKEN ||
+    process.env.UPSTASH_REDIS_REST_KV_REST_API_TOKEN ||
     process.env.UPSTASH_REDIS_REST_TOKEN ||
     process.env.UPSTASH_REDIS_REST_REST_TOKEN ||
     process.env.STORAGE_REST_TOKEN ||
