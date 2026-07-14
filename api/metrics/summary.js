@@ -174,6 +174,17 @@ function summarize(events) {
   };
 }
 
+function isTestEvent(event) {
+  return Boolean(
+    event &&
+    (
+      String(event.sessionId || '').indexOf('test-') === 0 ||
+      String(event.visitorId || '').indexOf('test-') === 0 ||
+      (event.data && event.data.test)
+    )
+  );
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'GET') {
     res.setHeader('Allow', 'GET');
@@ -190,7 +201,8 @@ module.exports = async function handler(req, res) {
 
   try {
     const events = (await readEvents(limit))
-      .filter((event) => toTimestamp(event.timestamp) >= minTime);
+      .filter((event) => toTimestamp(event.timestamp) >= minTime)
+      .filter((event) => !isTestEvent(event));
 
     return json(res, 200, {
       days,
