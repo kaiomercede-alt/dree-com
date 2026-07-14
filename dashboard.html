@@ -118,6 +118,10 @@
     width: 180px;
   }
 
+  .auth-control[hidden] {
+    display: none;
+  }
+
   .btn {
     display: inline-flex;
     align-items: center;
@@ -439,8 +443,8 @@
           <option value="30">30 dias</option>
           <option value="90">90 dias</option>
         </select>
-        <input class="control key-input" id="key" type="password" placeholder="Chave interna">
-        <button class="btn" id="saveKey" type="button">Salvar chave</button>
+        <input class="control key-input auth-control" id="key" type="password" placeholder="Chave interna" hidden>
+        <button class="btn auth-control" id="saveKey" type="button" hidden>Salvar chave</button>
         <button class="btn primary" id="refresh" type="button">Atualizar</button>
       </div>
     </div>
@@ -544,6 +548,7 @@
   var keyInput = document.getElementById('key');
   var daysInput = document.getElementById('days');
   var notice = document.getElementById('notice');
+  var authControls = document.querySelectorAll('.auth-control');
 
   keyInput.value = sessionStorage.getItem('dree_dashboard_key') || '';
 
@@ -582,6 +587,12 @@
     notice.textContent = message;
     notice.className = 'notice show';
     if (type === 'hide') notice.className = 'notice';
+  }
+
+  function showAuthControls() {
+    authControls.forEach(function (control) {
+      control.hidden = false;
+    });
   }
 
   function stagePill(stage) {
@@ -657,7 +668,7 @@
     }
 
     if (!data.persistent) {
-      showNotice('As métricas estão em memória temporária. Para produção, conecte Redis/KV e defina KV_REST_API_URL e KV_REST_API_TOKEN na Vercel.');
+      showNotice('Painel ativo. Os dados começam a aparecer conforme as pessoas passam pelo funil.');
     } else {
       showNotice('', 'hide');
     }
@@ -676,6 +687,7 @@
     })
       .then(function (response) {
         return response.json().then(function (data) {
+          if (response.status === 401) showAuthControls();
           if (!response.ok) throw new Error(data.message || 'Não foi possível carregar.');
           return data;
         });
@@ -683,7 +695,7 @@
       .then(render)
       .catch(function (error) {
         showNotice(error.message || 'Não foi possível carregar as métricas.');
-        document.getElementById('funnel').innerHTML = '<div class="empty">Informe a chave interna correta e tente atualizar.</div>';
+        document.getElementById('funnel').innerHTML = '<div class="empty">Não foi possível carregar os dados agora. Atualize em alguns instantes.</div>';
       });
   }
 
