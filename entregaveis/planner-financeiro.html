@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dree Maquiagem — Planner Financeiro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --purple:#580D9D; --purple-700:#440A79; --purple-300:#8B4FC9;
+    --magenta:#E4148C; --magenta-700:#B70E6F;
+    --yellow:#FFDD00; --yellow-ink:#3A2A00;
+    --wash:#F6F1FC; --wash-2:#EEE4F9; --line:#E9E2F1;
+    --ground:#FEFDFF; --ink:#1B1520; --muted:#6B6376;
+    --ok:#1E8A5B; --ok-soft:#E4F3EB;
+    --serif:"Poppins","Montserrat",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    --sans:"Montserrat",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+  body{margin:0; background:var(--wash); color:var(--ink); font-family:var(--sans); font-size:11pt; line-height:1.5; -webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4{font-family:var(--serif); font-weight:700; margin:0; letter-spacing:-0.015em; line-height:1.12;}
+  p{margin:0 0 10px;}
+  strong,b{font-weight:700;}
+  em{font-style:normal; color:var(--magenta-700); font-weight:700;}
+  ul,ol{margin:0 0 12px; padding-left:20px;} li{margin:0 0 6px;}
+
+  .page{width:210mm; min-height:297mm; margin:0 auto 14px; background:var(--ground); padding:24mm 20mm 22mm; position:relative; box-shadow:0 10px 40px rgba(88,13,157,.10); display:flex; flex-direction:column;}
+  .foot{position:absolute; left:20mm; right:20mm; bottom:11mm; display:flex; align-items:center; justify-content:space-between; font-size:8.5pt; color:var(--muted); letter-spacing:.04em;}
+  .foot .fmark{text-transform:uppercase; letter-spacing:.14em; font-weight:700; color:var(--purple);}
+  .brandline{color:var(--muted); font-size:9pt; font-weight:700; letter-spacing:.14em; text-transform:uppercase;}
+  .brandline b{color:var(--purple);}
+
+  .cover{background:radial-gradient(120% 90% at 100% 0%, rgba(228,20,140,.30), transparent 55%),radial-gradient(120% 90% at 0% 100%, rgba(255,221,0,.22), transparent 55%),linear-gradient(160deg,#5b0fa2 0%, #440A79 60%, #350862 100%); color:#fff; justify-content:space-between; padding:30mm 20mm;}
+  .cover .top{display:flex; align-items:center; justify-content:space-between;}
+  .cover .logo{font-family:var(--serif); font-weight:800; font-size:22pt; color:#fff;}
+  .cover .logo span{color:var(--yellow);}
+  .cover .logo i{display:block; font-style:normal; font-family:var(--sans); font-weight:700; font-size:8pt; letter-spacing:.32em; text-transform:uppercase; color:rgba(255,255,255,.72); margin-top:2px;}
+  .cover .tagpill{border:1.5px solid rgba(255,255,255,.4); border-radius:999px; padding:7px 15px; font-size:8.5pt; font-weight:800; letter-spacing:.16em; text-transform:uppercase;}
+  .cover .mid{margin:auto 0;}
+  .cover .kicker{display:inline-block; background:var(--yellow); color:var(--yellow-ink); font-weight:800; font-size:9pt; letter-spacing:.14em; text-transform:uppercase; padding:8px 14px; border-radius:8px; margin-bottom:22px;}
+  .cover h1{font-size:39pt; line-height:1.03; font-weight:800; text-wrap:balance; margin-bottom:16px;}
+  .cover h1 em{color:var(--yellow); font-style:normal;}
+  .cover .sub{font-size:13pt; color:rgba(255,255,255,.9); max-width:34ch; line-height:1.45;}
+  .cover .bottom{border-top:1px solid rgba(255,255,255,.22); padding-top:16px; display:flex; align-items:flex-end; justify-content:space-between; gap:20px;}
+  .cover .bottom .who{font-family:var(--serif); font-weight:700; font-size:12pt; color:#fff;}
+  .cover .bottom p{margin:0; font-size:10pt; color:rgba(255,255,255,.82);}
+  .cover .seals{display:flex; gap:8px; flex-wrap:wrap;}
+  .cover .seal{border:1px solid rgba(255,255,255,.35); border-radius:999px; padding:6px 12px; font-size:8pt; font-weight:700;}
+
+  .chapstart{border-left:5px solid var(--magenta); padding:2px 0 2px 16px; margin:0 0 14px;}
+  .chapstart .ch-n{font-size:9pt; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:var(--magenta);}
+  .chapstart h2{font-size:21pt; margin-top:6px; color:var(--purple-700);}
+  .chapstart .lead{margin-top:8px; color:var(--muted); font-size:10.5pt; max-width:62ch;}
+  h3{font-size:13pt; color:var(--purple); margin:14px 0 8px;}
+
+  .callout{background:var(--wash); border:1px solid var(--line); border-left:4px solid var(--purple); border-radius:12px; padding:12px 15px; margin:11px 0;}
+  .callout.pink{border-left-color:var(--magenta); background:#fdf0f8;}
+  .callout.gold{border-left-color:var(--yellow); background:#fffbe6;}
+  .callout .ttl{font-family:var(--serif); font-weight:700; font-size:10.5pt; color:var(--purple-700); margin-bottom:5px;}
+  .callout.pink .ttl{color:var(--magenta-700);}
+  .callout p:last-child{margin-bottom:0;}
+
+  table{width:100%; border-collapse:collapse; margin:10px 0; font-size:9.5pt;}
+  th,td{padding:0 9px; border:1px solid var(--line); text-align:left;}
+  th{background:var(--purple); color:#fff; font-family:var(--serif); font-weight:700; font-size:9pt; height:26px; text-align:center;}
+  td{height:30px;}
+  td.money{text-align:right; color:var(--muted);}
+  tr:nth-child(even) td{background:var(--wash);}
+  .tfill td{background:#fff;}
+  .tfill tr:nth-child(even) td{background:var(--wash);}
+  .totrow td{background:var(--yellow)!important; font-family:var(--serif); font-weight:800; color:var(--yellow-ink); height:30px;}
+
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:12px 0;}
+  .kpi{background:linear-gradient(160deg,#5b0fa2,#440A79); color:#fff; border-radius:14px; padding:14px 16px;}
+  .kpi .l{font-size:8.5pt; letter-spacing:.06em; text-transform:uppercase; color:rgba(255,255,255,.82);}
+  .kpi .box{margin-top:8px; height:34px; border-radius:8px; background:rgba(255,255,255,.14); border:1px dashed rgba(255,255,255,.4);}
+  .fbox{border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin:9px 0;}
+  .fbox .h{font-size:8.5pt; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--purple); margin-bottom:8px;}
+  .fline{height:26px; border-bottom:1px dashed var(--line);}
+  .fline:last-child{border-bottom:none;}
+
+  .formula{background:#faf6ff; border:1px dashed var(--purple-300); border-radius:12px; padding:13px 16px; margin:11px 0; text-align:center; font-family:var(--serif);}
+  .formula b{color:var(--purple-700); font-size:12.5pt;}
+  .formula span{display:block; margin-top:6px; font-family:var(--sans); font-size:9.5pt; color:var(--muted); font-weight:500;}
+
+  @media print{
+    body{background:#fff;}
+    .page{margin:0; box-shadow:none; page-break-after:always; break-after:page; min-height:auto; height:297mm; overflow:hidden;}
+    .page:last-child{page-break-after:auto;}
+    .noprint{display:none!important;}
+  }
+  @page{size:A4; margin:0;}
+  .bar{position:fixed; top:16px; right:16px; z-index:50;}
+  .bar button{font-family:var(--sans); font-weight:800; font-size:10pt; border:none; border-radius:999px; padding:11px 18px; cursor:pointer; background:var(--magenta); color:#fff; box-shadow:0 6px 20px rgba(88,13,157,.28);}
+</style>
+</head>
+<body>
+<div class="bar noprint"><button onclick="window.print()">⬇ Baixar / Imprimir PDF</button></div>
+
+<!-- CAPA -->
+<section class="page cover">
+  <div class="top">
+    <div class="logo">Dree<span>.</span><i>Maquiagem</i></div>
+    <div class="tagpill">Controle de Lucro</div>
+  </div>
+  <div class="mid">
+    <span class="kicker">Planner Financeiro</span>
+    <h1>Saiba exatamente <em>quanto você lucra</em></h1>
+    <p class="sub">Anote suas vendas, controle os custos e veja seu dinheiro crescer — sem planilha complicada.</p>
+  </div>
+  <div class="bottom">
+    <div>
+      <p class="who">Planner Financeiro</p>
+      <p>Versão para imprimir · Edição 2025</p>
+    </div>
+    <div class="seals">
+      <div class="seal">Registro de vendas</div>
+      <div class="seal">Custos &amp; lucro</div>
+      <div class="seal">Metas do mês</div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO USAR + REGISTRO -->
+<section class="page">
+  <div class="brandline"><b>Dree</b> Maquiagem · Planner Financeiro</div>
+  <div class="chapstart" style="margin-top:14px;">
+    <div class="ch-n">Comece por aqui</div>
+    <h2>Registro de vendas do mês</h2>
+    <p class="lead">Quem não anota, não sabe se lucra. A cada venda, preencha uma linha. No fim do mês, some — e descubra seu resultado real.</p>
+  </div>
+
+  <div class="formula">
+    <b>Lucro = (Preço de Venda − Custo) × Quantidade</b>
+    <span>Ex.: base vendida a R$ 55 que custou R$ 28 → lucro de R$ 27 por unidade.</span>
+  </div>
+
+  <table>
+    <thead><tr>
+      <th style="width:16%">Data</th><th style="width:28%">Cliente / Produto</th>
+      <th style="width:16%">Custo</th><th style="width:16%">Venda</th><th style="width:24%">Lucro</th>
+    </tr></thead>
+    <tbody class="tfill">
+      <tr><td></td><td></td><td class="money"></td><td class="money"></td><td class="money"></td></tr>
+      <tr><td></td><td></td><td class="money"></td><td class="money"></td><td class="money"></td></tr>
+      <tr><td></td><td></td><td class="money"></td><td class="money"></td><td class="money"></td></tr>
+      <tr><td></td><td></td><td class="money"></td><td class="money"></td><td class="money"></td></tr>
+      <tr><td></td><td></td><td class="money"></td><td class="money"></td><td class="money"></td></tr>
+      <tr><td></td><td></td><td class="money"></td><td class="money"></td><td class="money"></td></tr>
+      <tr><td></td><td></td><td class="money"></td><td class="money"></td><td class="money"></td></tr>
+      <tr><td></td><td></td><td class="money"></td><td class="money"></td><td class="money"></td></tr>
+      <tr><td></td><td></td><td class="money"></td><td class="money"></td><td class="money"></td></tr>
+      <tr><td></td><td></td><td class="money"></td><td class="money"></td><td class="money"></td></tr>
+      <tr><td></td><td></td><td class="money"></td><td class="money"></td><td class="money"></td></tr>
+      <tr><td></td><td></td><td class="money"></td><td class="money"></td><td class="money"></td></tr>
+      <tr class="totrow"><td colspan="2">TOTAL DO MÊS →</td><td class="money"></td><td class="money"></td><td class="money"></td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout gold">
+    <div class="ttl">💡 Precisa de mais linhas?</div>
+    <p>Imprima esta página quantas vezes quiser — uma para cada semana. Ou use a <b>versão em planilha</b> que veio junto: você digita a venda e o lucro é calculado sozinho.</p>
+  </div>
+
+  <div class="foot"><span class="fmark">Dree Maquiagem</span><span>Registro de vendas</span><span>02</span></div>
+</section>
+
+<!-- CUSTOS + RESUMO -->
+<section class="page">
+  <div class="brandline"><b>Dree</b> Maquiagem · Planner Financeiro</div>
+  <div class="chapstart" style="margin-top:14px;">
+    <div class="ch-n">Controle</div>
+    <h2>Custos, estoque e resumo</h2>
+    <p class="lead">Lucro de verdade é o que sobra depois de TODOS os custos. Não esqueça de anotar as despesas do negócio.</p>
+  </div>
+
+  <h3>Compras e custos do mês</h3>
+  <table>
+    <thead><tr>
+      <th style="width:16%">Data</th><th style="width:44%">O que comprei / gastei</th>
+      <th style="width:20%">Categoria</th><th style="width:20%">Valor</th>
+    </tr></thead>
+    <tbody class="tfill">
+      <tr><td></td><td></td><td></td><td class="money"></td></tr>
+      <tr><td></td><td></td><td></td><td class="money"></td></tr>
+      <tr><td></td><td></td><td></td><td class="money"></td></tr>
+      <tr><td></td><td></td><td></td><td class="money"></td></tr>
+      <tr><td></td><td></td><td></td><td class="money"></td></tr>
+      <tr><td></td><td></td><td></td><td class="money"></td></tr>
+      <tr class="totrow"><td colspan="3">TOTAL DE CUSTOS →</td><td class="money"></td></tr>
+    </tbody>
+  </table>
+  <div class="callout pink">
+    <div class="ttl">Não esqueça de incluir</div>
+    <p>Reposição de estoque · embalagens e sacolinhas · frete/combustível das entregas · brindes · taxa da maquininha. Tudo isso sai do seu lucro.</p>
+  </div>
+
+  <h3>Resumo do mês</h3>
+  <div class="grid2">
+    <div class="kpi"><div class="l">Faturamento (total vendido)</div><div class="box"></div></div>
+    <div class="kpi"><div class="l">Custos totais</div><div class="box"></div></div>
+    <div class="kpi" style="background:linear-gradient(160deg,#1E8A5B,#146b45)"><div class="l">Lucro líquido (o que sobrou)</div><div class="box"></div></div>
+    <div class="kpi" style="background:linear-gradient(160deg,#E4148C,#B70E6F)"><div class="l">Nº de vendas no mês</div><div class="box"></div></div>
+  </div>
+
+  <div class="foot"><span class="fmark">Dree Maquiagem</span><span>Custos &amp; resumo</span><span>03</span></div>
+</section>
+
+<!-- METAS + CLIENTES -->
+<section class="page">
+  <div class="brandline"><b>Dree</b> Maquiagem · Planner Financeiro</div>
+  <div class="chapstart" style="margin-top:14px;">
+    <div class="ch-n">Direção</div>
+    <h2>Metas e clientes para lembrar</h2>
+    <p class="lead">Sem meta, todo dia é igual. Defina onde quer chegar e acompanhe quem já comprou para trazer de volta.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="fbox"><div class="h">🎯 Meta de faturamento do mês</div><div class="fline"></div><div class="fline"></div></div>
+    <div class="fbox"><div class="h">💰 Meta de lucro do mês</div><div class="fline"></div><div class="fline"></div></div>
+  </div>
+  <div class="fbox"><div class="h">Quantas vendas preciso fazer para bater a meta?</div><div class="fline"></div></div>
+
+  <h3>Clientes para retornar (recompra)</h3>
+  <table>
+    <thead><tr>
+      <th style="width:26%">Cliente</th><th style="width:26%">O que comprou</th>
+      <th style="width:22%">Data da compra</th><th style="width:26%">Retornar em</th>
+    </tr></thead>
+    <tbody class="tfill">
+      <tr><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout gold">
+    <div class="ttl">💜 Lembre-se</div>
+    <p>Vender para quem já comprou é <b>5x mais barato</b> do que achar cliente nova. Toda venda anotada aqui é uma próxima venda esperando por você. Anote, retorne, fidelize.</p>
+  </div>
+
+  <div class="foot"><span class="fmark">Dree Maquiagem</span><span>Metas &amp; clientes</span><span>04</span></div>
+</section>
+
+</body>
+</html>

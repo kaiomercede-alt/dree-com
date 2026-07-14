@@ -1,0 +1,853 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dree Maquiagem — Ative sua vaga</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18321599080"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-18321599080');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light;
+    --purple: #580D9D;
+    --purple-700: #440A79;
+    --purple-300: #8B4FC9;
+    --magenta: #E4148C;
+    --magenta-700: #B70E6F;
+    --yellow: #FFDD00;
+    --yellow-ink: #3A2A00;
+    --wash: #F6F1FC;
+    --wash-2: #EEE4F9;
+    --line: #E9E2F1;
+    --ground: #FEFDFF;
+    --ink: #1B1520;
+    --muted: #6B6376;
+    --ok: #1E8A5B;
+    --ok-soft: #E4F3EB;
+    --serif: "Poppins", "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    --sans: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    --maxw: 680px;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--wash); color: var(--ink);
+    font-family: var(--sans); font-size: 16px; line-height: 1.55;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+    padding-bottom: 92px;
+  }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 700; margin: 0; letter-spacing: -0.015em; font-optical-sizing: auto; }
+  p { margin: 0; }
+  a { color: inherit; }
+  strong, b { font-weight: 700; }
+
+  .shell { max-width: var(--maxw); margin: 0 auto; padding-inline: 20px; }
+
+  /* Nav + progress */
+  nav { background: var(--ground); border-bottom: 1px solid var(--line); }
+  .nav-in { max-width: var(--maxw); margin: 0 auto; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .logo { display: flex; align-items: center; text-decoration: none; flex: none; }
+  .logo img { display: block; height: 36px; width: auto; }
+  .progress { flex: 1; max-width: 220px; display: flex; align-items: center; gap: 10px; }
+  .progress .track { flex: 1; height: 3px; border-radius: 99px; background: var(--line); overflow: hidden; }
+  .progress .track i { display: block; height: 100%; width: 100%; background: var(--purple); }
+  .progress .lbl { font-size: 12px; color: var(--muted); font-weight: 600; white-space: nowrap; }
+
+  /* Head */
+  .head { text-align: center; padding: 40px 0 8px; }
+  .head .kicker { font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--magenta); }
+  .head h1 { font-size: clamp(27px, 5.4vw, 38px); line-height: 1.08; margin-top: 12px; text-wrap: balance; }
+  .head p { color: var(--muted); margin: 12px auto 0; max-width: 44ch; font-size: 15.5px; }
+
+  /* Section card */
+  .block { background: var(--ground); border: 1px solid var(--line); border-radius: 18px; padding: 22px; margin-top: 18px; }
+  .block > .lbl { display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--purple); margin-bottom: 16px; }
+  .block > .lbl .n { width: 22px; height: 22px; border-radius: 50%; background: var(--purple); color: #fff; display: grid; place-items: center; font-family: var(--sans); font-size: 12px; font-weight: 800; }
+
+  /* Kit carousel (escolha por imagem) */
+  .kitcar { position: relative; }
+  .kittrack { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
+    padding: 4px 2px 8px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .kittrack::-webkit-scrollbar { display: none; }
+  .kittile { flex: 0 0 auto; width: 152px; scroll-snap-align: center; background: #fff; border: 2px solid var(--line);
+    border-radius: 15px; padding: 8px; cursor: pointer; font-family: var(--sans); text-align: left;
+    transition: border-color .2s var(--ease), transform .15s var(--ease); }
+  .kittile:focus-visible { outline: 3px solid var(--purple-300); outline-offset: 2px; }
+  .kittile .ph { position: relative; aspect-ratio: 1 / 1; border-radius: 10px; overflow: hidden; background: var(--wash-2); }
+  .kittile .ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .kittile .lockov { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(40,20,50,0.32); color: #fff; }
+  .kittile .meta { padding: 9px 3px 2px; }
+  .kittile .meta h3 { font-family: var(--serif); font-size: 15px; font-weight: 700; line-height: 1.12; }
+  .kittile .meta .st { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .kittile .pick { display: flex; align-items: center; gap: 5px; margin: 8px 3px 2px; font-size: 11px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); }
+  .kittile.available:hover { border-color: var(--purple-300); transform: translateY(-2px); }
+  .kittile.sel { border-color: var(--purple); box-shadow: 0 12px 26px -16px color-mix(in srgb, var(--purple) 60%, transparent); }
+  .kittile.sel .pick { color: var(--ok); }
+  .kittile.locked { cursor: not-allowed; }
+  .kittile.locked .ph { filter: grayscale(1); }
+  .kittile.locked .meta h3, .kittile.locked .meta .st { color: var(--muted); }
+  .kittile.shake { animation: shake .4s; }
+  @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
+
+  .cbtn { position: absolute; top: 82px; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%;
+    border: 1px solid var(--line); background: rgba(255,255,255,0.96); color: var(--purple); cursor: pointer;
+    display: grid; place-items: center; box-shadow: 0 8px 20px -8px rgba(68,10,121,0.35); z-index: 3; }
+  .cbtn:hover { background: #fff; }
+  .cbtn:focus-visible { outline: 3px solid var(--purple-300); outline-offset: 2px; }
+  .cbtn.prev { left: -6px; }
+  .cbtn.next { right: -6px; }
+  .cbtn svg { width: 20px; height: 20px; }
+
+  .unlock-note { font-size: 13px; color: var(--muted); margin-top: 16px; line-height: 1.5; background: var(--wash); border-radius: 11px; padding: 12px 14px; }
+  .unlock-note b { color: var(--purple-700); }
+  @media (prefers-reduced-motion: reduce){ .kittile.shake{ animation: none } .kittrack{ scroll-behavior: auto } }
+
+  /* Summary */
+  .sum .row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .sum .row .l { font-size: 15px; }
+  .sum .row .l small { display: block; font-size: 12.5px; color: var(--muted); margin-top: 1px; }
+  .sum .row .v { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .sum .row.later .v { color: var(--muted); }
+  .sum .total { display: flex; justify-content: space-between; align-items: baseline; padding-top: 16px; }
+  .sum .total .l { font-size: 15px; font-weight: 700; }
+  .sum .total .v { font-family: var(--sans); font-size: 30px; font-weight: 800; color: var(--purple); font-variant-numeric: tabular-nums; }
+  .sum .total .v .old { font-size: 14px; color: var(--muted); text-decoration: line-through; font-weight: 600; margin-left: 8px; }
+
+  /* Order bump */
+  .bump { margin-top: 14px; border: 1.5px dashed var(--magenta); border-radius: 13px; padding: 14px; display: flex; gap: 12px; align-items: flex-start; cursor: pointer; background: #fff; }
+  .bump input { flex: none; width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--magenta); }
+  .bump .txt { flex: 1; }
+  .bump .txt h4 { font-family: var(--sans); font-size: 14.5px; font-weight: 700; margin: 0 0 3px; }
+  .bump .txt p { font-size: 13px; color: var(--muted); }
+  .bump .txt .price { color: var(--magenta-700); font-weight: 700; }
+
+  /* Form */
+  .field { margin-bottom: 14px; }
+  .field.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .field label { display: block; font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+  .field input, .field select { width: 100%; font-family: var(--sans); font-size: 16px; color: var(--ink); background: #fff; border: 1.5px solid var(--line); border-radius: 11px; padding: 13px 14px; transition: border-color .2s var(--ease); }
+  .field input:focus, .field select:focus { outline: none; border-color: var(--purple); box-shadow: 0 0 0 3px var(--wash-2); }
+  .field input::placeholder { color: #b3a9bd; }
+  .grid-cep { display: grid; grid-template-columns: 130px 1fr; gap: 12px; }
+  .hint { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+  /* Payment */
+  .pix { display: flex; align-items: center; gap: 14px; border: 2px solid var(--purple); border-radius: 13px; padding: 16px; background: var(--wash); }
+  .pix .ico { flex: none; width: 42px; height: 42px; border-radius: 11px; background: #fff; border: 1px solid var(--line); display: grid; place-items: center; color: var(--purple); }
+  .pix .t h4 { font-family: var(--sans); font-size: 15px; font-weight: 700; margin: 0; }
+  .pix .t p { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .pix .check { margin-left: auto; color: var(--ok); flex: none; }
+
+  /* Buttons + trust */
+  .btn { display: flex; align-items: center; justify-content: center; gap: 11px; width: 100%; background: var(--purple); color: #fff; border: none; border-radius: 13px; font-family: var(--sans); font-size: 18px; font-weight: 800; padding: 18px 24px; cursor: pointer; transition: background .3s var(--ease), transform .2s var(--ease); }
+  .btn:hover { background: var(--purple-700); }
+  .btn:active { transform: scale(.99); }
+  .btn:focus-visible { outline: 3px solid var(--purple-300); outline-offset: 3px; }
+  .btn[disabled] { opacity: .72; cursor: wait; }
+  .btn.big { margin-top: 20px; box-shadow: 0 14px 30px -14px color-mix(in srgb, var(--purple) 70%, transparent); }
+  .trust-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 18px; margin-top: 18px; }
+  .trust-row span { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--muted); }
+  .trust-row svg { color: var(--ok); flex: none; }
+  .scarcity { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; font-weight: 700; color: var(--magenta-700); margin-top: 16px; }
+  .scarcity .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--magenta); animation: pulse 1.6s infinite; }
+  .submit-msg { margin-top: 12px; border-radius: 11px; padding: 12px 14px; font-size: 13px; font-weight: 600; }
+  .submit-msg.error { background: #fff3f8; color: var(--magenta-700); border: 1px solid color-mix(in srgb, var(--magenta) 18%, white); }
+  @keyframes pulse { 0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--magenta) 55%,transparent)} 70%{box-shadow:0 0 0 7px transparent} 100%{box-shadow:0 0 0 0 transparent} }
+
+  /* Sticky mobile bar */
+  .sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; background: color-mix(in srgb, var(--ground) 94%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--line); padding: 12px 20px calc(12px + env(safe-area-inset-bottom)); }
+  .sticky-in { max-width: var(--maxw); margin: 0 auto; display: flex; align-items: center; gap: 14px; }
+  .sticky .amt { flex: none; }
+  .sticky .amt small { display: block; font-size: 11px; color: var(--muted); line-height: 1; }
+  .sticky .amt b { font-size: 22px; color: var(--purple); font-variant-numeric: tabular-nums; }
+  .sticky .btn { flex: 1; padding: 15px 18px; font-size: 16px; }
+
+  /* Success */
+  .done { display: none; text-align: center; padding: 24px; }
+  .done.show { display: block; }
+  .done .circle { width: 66px; height: 66px; border-radius: 50%; background: var(--ok-soft); color: var(--ok); display: grid; place-items: center; margin: 0 auto 16px; }
+  .done h2 { font-size: 26px; margin-bottom: 8px; }
+  .done p { color: var(--muted); max-width: 40ch; margin: 0 auto; }
+  .done .intro { margin-bottom: 20px; }
+  .pix-status { display: inline-flex; align-items: center; gap: 8px; margin: 0 auto 18px; border-radius: 999px; padding: 8px 14px; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; background: var(--wash); color: var(--purple-700); }
+  .pix-status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+  .pix-status.waiting { color: var(--magenta-700); }
+  .pix-status.paid { color: var(--ok); background: var(--ok-soft); }
+  .pix-status.expired, .pix-status.refunded { color: var(--muted); }
+  .pix-panel { text-align: left; border: 1px solid var(--line); border-radius: 18px; padding: 18px; background: #fff; box-shadow: 0 18px 32px -26px rgba(68,10,121,0.38); }
+  .pix-grid { display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: 18px; align-items: start; }
+  .pix-qr { display: grid; place-items: center; min-height: 220px; border-radius: 16px; background: linear-gradient(180deg, #fff, var(--wash)); border: 1px solid var(--line); padding: 14px; }
+  .pix-qr img { display: block; max-width: 100%; height: auto; }
+  .pix-qr.empty { color: var(--muted); font-size: 13px; text-align: center; }
+  .pix-meta { display: grid; gap: 14px; }
+  .pix-meta .topline { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; justify-content: space-between; }
+  .pix-meta .value { font-size: 30px; font-weight: 800; color: var(--purple); font-variant-numeric: tabular-nums; }
+  .pix-meta .small { font-size: 12px; color: var(--muted); }
+  .pix-code { border-radius: 14px; border: 1px solid var(--line); background: var(--wash); padding: 14px; }
+  .pix-code label { display: block; font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--purple); margin-bottom: 8px; }
+  .pix-code textarea { width: 100%; min-height: 114px; resize: vertical; border: 0; background: transparent; color: var(--ink); font: 500 13px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  .pix-code textarea:focus { outline: none; }
+  .done-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+  .done-actions .btn { width: auto; min-width: 180px; padding: 14px 18px; font-size: 15px; }
+  .btn.ghost { background: #fff; color: var(--purple); border: 1px solid var(--line); box-shadow: none; }
+  .btn.ghost:hover { background: var(--wash); }
+  .pix-note { font-size: 13px; line-height: 1.5; color: var(--muted); }
+  .pix-order { display: grid; gap: 6px; font-size: 13px; color: var(--muted); }
+  .pix-order b { color: var(--ink); }
+
+  footer { text-align: center; color: var(--muted); font-size: 12.5px; padding: 32px 20px 24px; }
+  footer b { color: var(--purple); font-family: var(--serif); font-weight: 700; }
+  footer .legal { display: flex; flex-wrap: wrap; gap: 8px 16px; justify-content: center; margin-bottom: 14px; }
+  footer .legal a { color: var(--purple); font-weight: 600; text-decoration: none; }
+  footer .legal a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  @media (max-width: 720px) {
+    .head { padding: 28px 0 4px; }
+    .block { padding: 18px; }
+    .pix-grid { grid-template-columns: 1fr; }
+    .done-actions .btn { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="index.html" class="logo"><img src="img/logo.png" alt="Dree Maquiagem"></a>
+    <div class="progress"><div class="track"><i></i></div><span class="lbl">Etapa 3 de 3</span></div>
+  </div>
+</nav>
+
+<div class="shell" id="checkout">
+
+  <header class="head">
+    <span class="kicker">Última etapa</span>
+    <h1>Ative sua vaga e receba seu kit</h1>
+    <p>Você paga só o frete agora. O restante do kit, só depois de vender.</p>
+  </header>
+
+  <!-- 1. KIT (carrossel de escolha por imagem) -->
+  <section class="block">
+    <div class="lbl"><span class="n">1</span> Escolha seu kit</div>
+
+    <div class="kitcar">
+      <button type="button" class="cbtn prev" aria-label="Ver kit anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18 9 12l6-6"/></svg>
+      </button>
+
+      <div class="kittrack" id="kittrack">
+        <button type="button" class="kittile available sel" aria-pressed="true">
+          <div class="ph"><img src="img/kit-loja-10.webp" alt="Kit Loja de 10"></div>
+          <div class="meta"><h3>Kit Loja de 10</h3><span class="st">40 itens · fature até R$350</span></div>
+          <span class="pick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Selecionado</span>
+        </button>
+
+        <button type="button" class="kittile locked" data-locked aria-disabled="true">
+          <div class="ph">
+            <img src="img/kit-2.webp" alt="Kit 2 Revenda" onerror="this.style.visibility='hidden'">
+            <span class="lockov"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+          </div>
+          <div class="meta"><h3>Kit 2 Revenda</h3><span class="st">42 itens</span></div>
+          <span class="pick">Bloqueado</span>
+        </button>
+
+        <button type="button" class="kittile locked" data-locked aria-disabled="true">
+          <div class="ph">
+            <img src="img/kit-3.webp" alt="Kit 3 Revenda" onerror="this.style.visibility='hidden'">
+            <span class="lockov"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+          </div>
+          <div class="meta"><h3>Kit 3 Revenda</h3><span class="st">60 itens</span></div>
+          <span class="pick">Bloqueado</span>
+        </button>
+
+        <button type="button" class="kittile locked" data-locked aria-disabled="true">
+          <div class="ph">
+            <img src="img/kit-completa.webp" alt="Kit Loja Completa" onerror="this.style.visibility='hidden'">
+            <span class="lockov"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+          </div>
+          <div class="meta"><h3>Kit Loja Completa</h3><span class="st">110 itens</span></div>
+          <span class="pick">Bloqueado</span>
+        </button>
+      </div>
+
+      <button type="button" class="cbtn next" aria-label="Ver próximo kit">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+    </div>
+
+    <p class="unlock-note"><b>Só o Kit de entrada está liberado agora.</b> Os outros ficam bloqueados e liberam sozinhos depois que você vende o primeiro. Assim você cresce no seu ritmo, sem se arriscar.</p>
+  </section>
+
+  <!-- 2. RESUMO -->
+  <section class="block">
+    <div class="lbl"><span class="n">2</span> Seu pedido</div>
+    <div class="sum">
+      <div class="row">
+        <span class="l">Kit Loja de 10<small>frete e ativação, já abate do valor</small></span>
+        <span class="v" data-frete>R$37,00</span>
+      </div>
+      <div class="row" id="bumpRow" hidden>
+        <span class="l">Embalagem rosa da marca<small>sacolas, laços e adesivos</small></span>
+        <span class="v">R$19,90</span>
+      </div>
+      <div class="row later">
+        <span class="l">Restante do kit<small>por Pix, só depois de vender</small></span>
+        <span class="v">R$112,90</span>
+      </div>
+      <div class="total">
+        <span class="l">Você paga hoje</span>
+        <span class="v"><span id="totalHoje">R$37,00</span></span>
+      </div>
+    </div>
+
+    <label class="bump">
+      <input type="checkbox" id="bump">
+      <span class="txt">
+        <h4>Adicionar embalagem rosa da marca</h4>
+        <p>Suas vendas com carinha profissional: sacolas, laços e adesivos da Dree. <span class="price">+R$19,90</span></p>
+      </span>
+    </label>
+  </section>
+
+  <!-- 3. DADOS -->
+  <form id="form">
+  <section class="block">
+    <div class="lbl"><span class="n">3</span> Seus dados</div>
+    <div class="field">
+      <label for="nome">Nome completo</label>
+      <input id="nome" name="nome" type="text" autocomplete="name" placeholder="Como está no seu documento" required>
+    </div>
+    <div class="field">
+      <label for="email">E-mail</label>
+      <input id="email" name="email" type="email" autocomplete="email" placeholder="voce@exemplo.com" required>
+    </div>
+    <div class="field row2">
+      <div>
+        <label for="whats">WhatsApp</label>
+        <input id="whats" name="whats" type="tel" inputmode="numeric" autocomplete="tel" placeholder="(00) 00000-0000" required>
+      </div>
+      <div>
+        <label for="cpf">CPF</label>
+        <input id="cpf" name="cpf" type="text" inputmode="numeric" placeholder="000.000.000-00" required>
+      </div>
+    </div>
+    <p class="hint">Usamos seu CPF só pra registrar seu kit. É pelo WhatsApp que a gente combina o acerto e manda o rastreio.</p>
+  </section>
+
+  <!-- 4. ENTREGA -->
+  <section class="block">
+    <div class="lbl"><span class="n">4</span> Endereço de entrega</div>
+    <div class="field">
+      <label for="cep">CEP</label>
+      <div class="grid-cep">
+        <input id="cep" name="cep" type="text" inputmode="numeric" placeholder="00000-000" required>
+        <input id="rua" name="rua" type="text" autocomplete="address-line1" placeholder="Rua / Avenida" required>
+      </div>
+      <p class="hint" id="cepHint">Digite o CEP que a gente preenche o endereço pra você.</p>
+    </div>
+    <div class="field row2">
+      <div><label for="numero">Número</label><input id="numero" name="numero" type="text" inputmode="numeric" placeholder="123" required></div>
+      <div><label for="compl">Complemento</label><input id="compl" name="compl" type="text" placeholder="Apto, bloco (opcional)"></div>
+    </div>
+    <div class="field row2">
+      <div><label for="bairro">Bairro</label><input id="bairro" name="bairro" type="text" placeholder="Seu bairro" required></div>
+      <div><label for="cidade">Cidade</label><input id="cidade" name="cidade" type="text" placeholder="Sua cidade" required></div>
+    </div>
+    <div class="field">
+      <label for="uf">Estado</label>
+      <select id="uf" name="uf" required>
+        <option value="" selected disabled>UF</option>
+        <option>AC</option><option>AL</option><option>AP</option><option>AM</option><option>BA</option><option>CE</option><option>DF</option><option>ES</option><option>GO</option><option>MA</option><option>MT</option><option>MS</option><option>MG</option><option>PA</option><option>PB</option><option>PR</option><option>PE</option><option>PI</option><option>RJ</option><option>RN</option><option>RS</option><option>RO</option><option>RR</option><option>SC</option><option>SP</option><option>SE</option><option>TO</option>
+      </select>
+    </div>
+  </section>
+
+  <!-- 5. PAGAMENTO -->
+  <section class="block">
+    <div class="lbl"><span class="n">5</span> Pagamento</div>
+    <div class="pix">
+      <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 12l10 10 10-10z"/></svg></div>
+      <div class="t"><h4>Pix</h4><p>Aprovação na hora. Você recebe o código na próxima tela.</p></div>
+      <span class="check"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+    </div>
+
+    <button type="submit" class="btn big"><span>Ativar minha vaga por <b id="btnValor">R$37,00</b></span></button>
+    <p class="submit-msg error" id="submitMsg" hidden></p>
+
+    <div class="trust-row">
+      <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Pagamento seguro</span>
+      <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> O risco é nosso</span>
+      <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/></svg> Rastreio no WhatsApp</span>
+    </div>
+    <div class="scarcity"><span class="dot"></span> Restam poucas vagas com envio ainda esta semana</div>
+  </section>
+  </form>
+
+  <!-- SUCESSO (placeholder ate plugar o gateway) -->
+  <section class="block done" id="done">
+    <div class="circle"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+    <h2 id="doneTitle">Seu PIX foi gerado</h2>
+    <p class="intro" id="doneIntro">Escaneie o QR Code no app do banco ou copie o codigo Pix. Quando o pagamento cair, a vaga fica confirmada na hora.</p>
+    <div class="pix-status waiting" id="pixStatus">Aguardando pagamento</div>
+    <div class="pix-panel">
+      <div class="pix-grid">
+        <div class="pix-qr empty" id="pixQr">Gerando QR Code...</div>
+        <div class="pix-meta">
+          <div class="topline">
+            <div>
+              <div class="small">Valor do PIX</div>
+              <div class="value" id="pixAmount">R$0,00</div>
+            </div>
+            <div class="small" id="pixExpires">Validade: --</div>
+          </div>
+          <div class="pix-code">
+            <label for="pixCode">Pix copia e cola</label>
+            <textarea id="pixCode" readonly placeholder="O codigo Pix vai aparecer aqui."></textarea>
+          </div>
+          <div class="done-actions">
+            <button type="button" class="btn" id="copyPixBtn">Copiar codigo Pix</button>
+            <button type="button" class="btn ghost" id="checkStatusBtn">Atualizar status</button>
+          </div>
+          <div class="pix-order">
+            <span>Pedido: <b id="pixOrder">--</b></span>
+            <span>Transacao: <b id="pixTransactionId">--</b></span>
+          </div>
+          <p class="pix-note" id="pixNote">Mantenha esta tela aberta ate o banco confirmar o pagamento. Se preferir, voce tambem pode copiar o codigo e pagar depois.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="legal">
+    <a href="privacidade.html">Política de Privacidade</a>
+    <a href="termos.html">Termos de Uso</a>
+    <a href="trocas-reembolso.html">Trocas e Reembolso</a>
+    <a href="cookies.html">Aviso de Cookies</a>
+  </div>
+  <p><b>Dree Maquiagem</b> · transformando empreendedoras iniciantes em empreendedoras de sucesso.</p>
+  <p>© 2026 Dree Maquiagem · Todos os direitos reservados.</p>
+</footer>
+
+<!-- Barra fixa (mobile) -->
+<div class="sticky">
+  <div class="sticky-in">
+    <div class="amt"><small>Você paga hoje</small><b id="stickyValor">R$37,00</b></div>
+    <button class="btn" id="stickyBtn">Ativar minha vaga</button>
+  </div>
+</div>
+
+<script>window.DREE_FUNNEL = { step: 'checkout' };</script>
+<script src="assets/js/funnel-tracker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+<script>
+(function () {
+  var BASE = 37.00, BUMP = 19.90;
+  var BASE_CENTS = 3700, BUMP_CENTS = 1990;
+  var bump = document.getElementById('bump');
+  var bumpRow = document.getElementById('bumpRow');
+  var form = document.getElementById('form');
+  var checkout = document.getElementById('checkout');
+  var sticky = document.querySelector('.sticky');
+  var stickyBtn = document.getElementById('stickyBtn');
+  var submitBtn = form.querySelector('button[type=submit]');
+  var submitLabel = submitBtn.querySelector('span');
+  var submitMsg = document.getElementById('submitMsg');
+  var done = document.getElementById('done');
+  var qrContainer = document.getElementById('pixQr');
+  var pixCode = document.getElementById('pixCode');
+  var pixStatus = document.getElementById('pixStatus');
+  var pixAmount = document.getElementById('pixAmount');
+  var pixExpires = document.getElementById('pixExpires');
+  var pixOrder = document.getElementById('pixOrder');
+  var pixTransactionId = document.getElementById('pixTransactionId');
+  var pixNote = document.getElementById('pixNote');
+  var doneTitle = document.getElementById('doneTitle');
+  var doneIntro = document.getElementById('doneIntro');
+  var copyPixBtn = document.getElementById('copyPixBtn');
+  var checkStatusBtn = document.getElementById('checkStatusBtn');
+  var pollTimer = null;
+  var currentTransactionId = '';
+  var currentPixCode = '';
+  var currentOrderValue = 0;
+  var purchaseTracked = false;
+  var fmt = function (n) { return 'R$' + n.toFixed(2).replace('.', ','); };
+  var statusMap = {
+    waiting: 'Aguardando pagamento',
+    paid: 'Pagamento aprovado',
+    refunded: 'Pagamento estornado',
+    expired: 'PIX expirado'
+  };
+
+  function totalAmount() {
+    return BASE + (bump.checked ? BUMP : 0);
+  }
+
+  function totalAmountCents() {
+    return BASE_CENTS + (bump.checked ? BUMP_CENTS : 0);
+  }
+
+  function trackGooglePurchase() {
+    if (purchaseTracked || typeof window.gtag !== 'function') return;
+    purchaseTracked = true;
+    if (window.DreeMetrics) {
+      window.DreeMetrics.track('payment_approved', {
+        transactionId: currentTransactionId || '',
+        value: currentOrderValue || totalAmount()
+      });
+    }
+    window.gtag('event', 'conversion', {
+      send_to: 'AW-18321599080/2ANfCOXeh9AcEOjUtaBE',
+      value: currentOrderValue || totalAmount(),
+      currency: 'BRL',
+      transaction_id: currentTransactionId || ''
+    });
+  }
+
+  function refresh() {
+    var total = totalAmount();
+    bumpRow.hidden = !bump.checked;
+    document.getElementById('totalHoje').textContent = fmt(total);
+    document.getElementById('btnValor').textContent = fmt(total);
+    document.getElementById('stickyValor').textContent = fmt(total);
+  }
+
+  function hideSubmitError() {
+    submitMsg.hidden = true;
+    submitMsg.textContent = '';
+  }
+
+  function showSubmitError(message) {
+    submitMsg.textContent = message;
+    submitMsg.hidden = false;
+  }
+
+  function setLoading(isLoading) {
+    submitBtn.disabled = isLoading;
+    stickyBtn.disabled = isLoading;
+    submitLabel.innerHTML = isLoading ? 'Gerando seu Pix...' : 'Ativar minha vaga por <b id="btnValor">' + fmt(totalAmount()) + '</b>';
+    if (!isLoading) {
+      document.getElementById('btnValor').textContent = fmt(totalAmount());
+    }
+  }
+
+  function sanitizeStatus(status) {
+    var value = String(status || '').toLowerCase();
+    if (value.indexOf('paid') !== -1) return 'paid';
+    if (value.indexOf('refund') !== -1) return 'refunded';
+    if (value.indexOf('expir') !== -1) return 'expired';
+    if (value.indexOf('wait') !== -1 || value.indexOf('pending') !== -1) return 'waiting';
+    return 'waiting';
+  }
+
+  function formatDate(value) {
+    if (!value) return '--';
+    var date = new Date(value);
+    if (Number.isNaN(date.getTime())) return '--';
+    return new Intl.DateTimeFormat('pt-BR', {
+      dateStyle: 'short',
+      timeStyle: 'short'
+    }).format(date);
+  }
+
+  function updatePixStatus(status) {
+    var normalized = sanitizeStatus(status);
+    pixStatus.className = 'pix-status ' + normalized;
+    pixStatus.textContent = statusMap[normalized] || 'Aguardando pagamento';
+
+    if (normalized === 'paid') {
+      doneTitle.textContent = 'Pagamento confirmado';
+      doneIntro.textContent = 'Recebemos seu pagamento! Estamos liberando seus materiais para download...';
+      pixNote.textContent = 'Voce sera redirecionada em instantes para baixar seus entregaveis.';
+      trackGooglePurchase();
+      clearPolling();
+      if (!window.__dreeRedirected) {
+        window.__dreeRedirected = true;
+        setTimeout(function () { window.location.href = 'entregaveis.html'; }, 2500);
+      }
+    } else if (normalized === 'expired') {
+      doneTitle.textContent = 'PIX expirado';
+      doneIntro.textContent = 'Esse codigo nao pode mais ser pago. Gere um novo PIX voltando para a etapa anterior.';
+      pixNote.textContent = 'Se o banco recusou por expiracao, recarregue a pagina para gerar outro codigo.';
+      clearPolling();
+    }
+  }
+
+  function renderQrCode(code) {
+    qrContainer.innerHTML = '';
+    qrContainer.classList.remove('empty');
+
+    if (!code) {
+      qrContainer.classList.add('empty');
+      qrContainer.textContent = 'Nao foi possivel montar o QR Code. Use o copia e cola abaixo.';
+      return;
+    }
+
+    if (window.QRCode) {
+      new window.QRCode(qrContainer, {
+        text: code,
+        width: 220,
+        height: 220
+      });
+      return;
+    }
+
+    qrContainer.classList.add('empty');
+    qrContainer.textContent = 'QR Code indisponivel no momento. Use o copia e cola abaixo.';
+  }
+
+  function revealPixScreen(data) {
+    currentTransactionId = data.transactionId || '';
+    currentPixCode = data.pixCode || '';
+    currentOrderValue = (Number(data.amount || 0) || totalAmountCents()) / 100;
+
+    checkout.querySelectorAll('.block, .head').forEach(function (block) {
+      if (block.id !== 'done') block.style.display = 'none';
+    });
+    done.classList.add('show');
+    sticky.style.display = 'none';
+
+    pixAmount.textContent = fmt(currentOrderValue);
+    pixExpires.textContent = 'Validade: ' + formatDate(data.expiresAt);
+    pixOrder.textContent = data.orderNumber || '--';
+    pixTransactionId.textContent = currentTransactionId || '--';
+    pixCode.value = currentPixCode;
+    renderQrCode(currentPixCode);
+    if (window.DreeMetrics) {
+      window.DreeMetrics.track('pix_generated', {
+        transactionId: currentTransactionId,
+        orderNumber: data.orderNumber || '',
+        amount: currentOrderValue,
+        orderBump: bump.checked
+      });
+      window.DreeMetrics.setStep('pix');
+    }
+    updatePixStatus(data.status);
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    if (currentTransactionId) {
+      startPolling();
+    }
+  }
+
+  function clearPolling() {
+    if (pollTimer) {
+      clearInterval(pollTimer);
+      pollTimer = null;
+    }
+  }
+
+  function syncStatus() {
+    if (!currentTransactionId) return Promise.resolve();
+
+    checkStatusBtn.disabled = true;
+    return fetch('/api/fyntra/status?id=' + encodeURIComponent(currentTransactionId))
+      .then(function (response) {
+        return response.json().then(function (data) {
+          if (!response.ok) throw new Error(data.message || 'Nao foi possivel consultar o status.');
+          return data;
+        });
+      })
+      .then(function (data) {
+        if (data.pixCode && !pixCode.value) {
+          pixCode.value = data.pixCode;
+          renderQrCode(data.pixCode);
+        }
+        if (data.expiresAt) {
+          pixExpires.textContent = 'Validade: ' + formatDate(data.expiresAt);
+        }
+        updatePixStatus(data.status);
+      })
+      .catch(function () {
+        pixNote.textContent = 'Ainda estamos aguardando a confirmacao. Se voce ja pagou, atualize novamente em alguns instantes.';
+      })
+      .finally(function () {
+        checkStatusBtn.disabled = false;
+      });
+  }
+
+  function startPolling() {
+    clearPolling();
+    pollTimer = setInterval(function () {
+      syncStatus();
+    }, 5000);
+  }
+
+  bump.addEventListener('change', function () {
+    refresh();
+    if (window.DreeMetrics) {
+      window.DreeMetrics.track('order_bump_toggle', {
+        checked: bump.checked,
+        total: totalAmount()
+      });
+    }
+  });
+  refresh();
+
+  // Carrossel de kits (escolha por imagem)
+  var ktrack = document.getElementById('kittrack');
+  if (ktrack) {
+    var kstep = function (dir) {
+      var t = ktrack.querySelector('.kittile');
+      var w = t.getBoundingClientRect().width + 12;
+      ktrack.scrollBy({ left: dir * w, behavior: 'smooth' });
+    };
+    document.querySelector('.cbtn.prev').addEventListener('click', function () { kstep(-1); });
+    document.querySelector('.cbtn.next').addEventListener('click', function () { kstep(1); });
+    ktrack.querySelectorAll('.kittile').forEach(function (tile) {
+      tile.addEventListener('click', function () {
+        if (tile.classList.contains('locked')) {
+          tile.classList.remove('shake'); void tile.offsetWidth; tile.classList.add('shake');
+          if (window.DreeMetrics) {
+            window.DreeMetrics.track('locked_kit_click', {
+              kit: (tile.querySelector('h3') || {}).textContent || 'Kit bloqueado'
+            });
+          }
+          return;
+        }
+        ktrack.querySelectorAll('.kittile.available').forEach(function (t) {
+          t.classList.remove('sel'); t.setAttribute('aria-pressed', 'false');
+        });
+        tile.classList.add('sel'); tile.setAttribute('aria-pressed', 'true');
+        if (window.DreeMetrics) {
+          window.DreeMetrics.track('kit_select', {
+            kit: (tile.querySelector('h3') || {}).textContent || 'Kit Loja de 10'
+          });
+        }
+      });
+    });
+  }
+
+  // Máscaras simples
+  function mask(el, fn) { el.addEventListener('input', function () { var s = el.selectionStart; el.value = fn(el.value); }); }
+  var onlyD = function (v) { return v.replace(/\D/g, ''); };
+  mask(document.getElementById('cpf'), function (v) { v = onlyD(v).slice(0,11); return v.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2'); });
+  mask(document.getElementById('whats'), function (v) { v = onlyD(v).slice(0,11); return v.replace(/(\d{2})(\d)/,'($1) $2').replace(/(\d{5})(\d)/,'$1-$2'); });
+  var cep = document.getElementById('cep');
+  mask(cep, function (v) { v = onlyD(v).slice(0,8); return v.replace(/(\d{5})(\d)/,'$1-$2'); });
+
+  // Autopreenche endereço pelo CEP (ViaCEP, best-effort)
+  cep.addEventListener('blur', function () {
+    var d = onlyD(cep.value);
+    if (d.length !== 8) return;
+    document.getElementById('cepHint').textContent = 'Buscando endereço...';
+    fetch('https://viacep.com.br/ws/' + d + '/json/').then(function (r) { return r.json(); }).then(function (a) {
+      if (a.erro) { document.getElementById('cepHint').textContent = 'CEP não encontrado. Pode preencher na mão.'; return; }
+      if (a.logradouro) document.getElementById('rua').value = a.logradouro;
+      if (a.bairro) document.getElementById('bairro').value = a.bairro;
+      if (a.localidade) document.getElementById('cidade').value = a.localidade;
+      if (a.uf) document.getElementById('uf').value = a.uf;
+      document.getElementById('cepHint').textContent = 'Endereço preenchido. Confira o número.';
+      document.getElementById('numero').focus();
+    }).catch(function () { document.getElementById('cepHint').textContent = 'Preencha o endereço na mão.'; });
+  });
+
+  // Sticky button aciona o submit
+  stickyBtn.addEventListener('click', function () {
+    document.querySelector('#form button[type=submit]').click();
+  });
+
+  copyPixBtn.addEventListener('click', function () {
+    if (!currentPixCode) return;
+
+    var doneCopy = function () {
+      copyPixBtn.textContent = 'Codigo copiado';
+      window.setTimeout(function () {
+        copyPixBtn.textContent = 'Copiar codigo Pix';
+      }, 1800);
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(currentPixCode).then(doneCopy).catch(function () {
+        pixCode.focus();
+        pixCode.select();
+        document.execCommand('copy');
+        doneCopy();
+      });
+      return;
+    }
+
+    pixCode.focus();
+    pixCode.select();
+    document.execCommand('copy');
+    doneCopy();
+  });
+
+  checkStatusBtn.addEventListener('click', function () {
+    syncStatus();
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!this.checkValidity()) { this.reportValidity(); return; }
+
+    hideSubmitError();
+    setLoading(true);
+    if (window.DreeMetrics) {
+      window.DreeMetrics.track('checkout_submit', {
+        orderBump: bump.checked,
+        amount: totalAmount()
+      });
+    }
+
+    var payload = {
+      amount: totalAmountCents(),
+      orderBump: bump.checked,
+      shippingAmount: totalAmountCents(),
+      tracking: window.DreeMetrics ? window.DreeMetrics.identify() : null,
+      name: document.getElementById('nome').value,
+      email: document.getElementById('email').value,
+      phone: document.getElementById('whats').value,
+      document: document.getElementById('cpf').value,
+      address: {
+        zipCode: document.getElementById('cep').value,
+        street: document.getElementById('rua').value,
+        number: document.getElementById('numero').value,
+        complement: document.getElementById('compl').value,
+        neighborhood: document.getElementById('bairro').value,
+        city: document.getElementById('cidade').value,
+        state: document.getElementById('uf').value
+      }
+    };
+
+    fetch('/api/fyntra/pix', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    }).then(function (response) {
+      return response.json().then(function (data) {
+        if (!response.ok) throw new Error(data.message || 'Nao foi possivel gerar o PIX.');
+        return data;
+      });
+    }).then(function (data) {
+      revealPixScreen(data);
+    }).catch(function (error) {
+      showSubmitError(error.message || 'Nao foi possivel gerar o PIX agora. Tente novamente em instantes.');
+    }).finally(function () {
+      setLoading(false);
+      refresh();
+    });
+  });
+})();
+</script>
+</body>
+</html>

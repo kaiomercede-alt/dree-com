@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dree Maquiagem — Revenda e pague depois de vender</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18321599080"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-18321599080');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light;
+    --purple: #580D9D;
+    --purple-700: #440A79;
+    --purple-300: #8B4FC9;
+    --magenta: #E4148C;
+    --magenta-700: #B70E6F;
+    --yellow: #FFDD00;
+    --yellow-ink: #3A2A00;
+    --wash: #F6F1FC;
+    --wash-2: #EEE4F9;
+    --line: #E9E2F1;
+    --ground: #FEFDFF;
+    --ink: #1B1520;
+    --muted: #6B6376;
+    --ok: #1E8A5B;
+    --serif: "Poppins", "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    --sans: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    --maxw: 1120px;
+    --readw: 720px;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--ground); color: var(--ink);
+    font-family: var(--sans); font-size: 17px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 700; margin: 0; letter-spacing: -0.015em;
+    font-optical-sizing: auto; }
+  p { margin: 0; }
+  a { color: inherit; }
+  strong, b { font-weight: 700; }
+
+  .shell { max-width: var(--maxw); margin: 0 auto; padding-inline: 24px; }
+  .read { max-width: var(--readw); margin: 0 auto; }
+  .kicker { font-size: 12.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--purple); }
+
+  /* ---- Nav ---- */
+  nav { border-bottom: 1px solid var(--line); }
+  .nav-in { max-width: var(--maxw); margin: 0 auto; padding: 18px 24px;
+    display: flex; align-items: center; justify-content: space-between; }
+  .logo { display: flex; align-items: center; }
+  .logo img { display: block; height: 40px; width: auto; }
+  .nav-cta { font-size: 14.5px; font-weight: 600; color: var(--purple); text-decoration: none; }
+  .nav-cta:hover { color: var(--purple-700); text-decoration: underline; text-underline-offset: 4px; }
+
+  /* ---- Buttons ---- */
+  .btn { display: inline-flex; align-items: center; gap: 11px; background: var(--purple); color: #fff;
+    border: none; border-radius: 12px; font-family: var(--sans); font-size: 18px; font-weight: 700;
+    padding: 18px 32px; text-decoration: none; cursor: pointer;
+    transition: background .3s var(--ease), transform .3s var(--ease); }
+  .btn:hover { background: var(--purple-700); transform: translateY(-1px); }
+  .btn:focus-visible { outline: 3px solid var(--purple-300); outline-offset: 3px; }
+  .btn .ar { transition: transform .3s var(--ease); }
+  .btn:hover .ar { transform: translateX(4px); }
+
+  /* ---- Hero ---- */
+  .hero { padding: 62px 0 8px; text-align: center; }
+  .hero .kicker { display: block; margin-bottom: 22px; }
+  h1 { font-size: clamp(36px, 6.2vw, 66px); line-height: 1.02; text-wrap: balance;
+    max-width: 15ch; margin: 0 auto; }
+  h1 .u { color: var(--purple); font-style: normal; }
+  .subhead { font-size: clamp(17px, 2.2vw, 20px); color: var(--muted); margin: 24px auto 0;
+    max-width: 52ch; line-height: 1.55; }
+  .subhead b { color: var(--ink); font-weight: 600; }
+
+  /* ---- VSL ---- */
+  .vsl-wrap { max-width: 860px; margin: 40px auto 0; padding: 0 24px; }
+  .vsl { position: relative; aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden;
+    background: #2A0653; box-shadow: 0 40px 80px -46px rgba(68, 10, 121, 0.6); }
+  .vsl iframe, .vsl video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
+    object-fit: cover; background: #2A0653; }
+  .vposter { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; align-items: center;
+    justify-content: center; text-align: center; gap: 12px; padding: 20px; pointer-events: none;
+    background: linear-gradient(180deg, rgba(76,15,140,0.42), rgba(42,6,83,0.5) 60%, rgba(30,4,60,0.58));
+    transition: opacity .35s var(--ease); }
+  .vposter .playic { width: 60px; height: 60px; border-radius: 50%; background: rgba(255,255,255,0.96);
+    display: grid; place-items: center; box-shadow: 0 10px 26px -8px rgba(0,0,0,0.55); }
+  .vposter .playic svg { margin-left: 3px; }
+  .vposter .eb { font-size: 12.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+    color: rgba(255,255,255,0.92); text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+  .vposter .big { font-family: var(--serif); font-style: normal; font-weight: 700; color: var(--yellow);
+    font-size: clamp(21px, 4.4vw, 30px); line-height: 1.18; max-width: 20ch; text-wrap: balance;
+    text-shadow: 0 2px 14px rgba(0,0,0,0.55); }
+  .vsl.played .vposter { opacity: 0; pointer-events: none; }
+  .vsl > .vposter { padding-bottom: 58px; }
+  .under-vsl { text-align: center; margin-top: 30px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .reassure { font-size: 14.5px; color: var(--muted); max-width: 42ch; text-align: center; line-height: 1.5; }
+  .reassure svg { vertical-align: -2px; margin-right: 5px; }
+
+  /* ---- Reason why ---- */
+  .why { margin-top: 96px; background: var(--wash); border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line); padding: 74px 0; }
+  .why .kicker { margin-bottom: 16px; }
+  .why h2 { font-size: clamp(30px, 4.6vw, 46px); line-height: 1.05; margin-bottom: 30px; }
+  .why p { font-size: 18.5px; line-height: 1.62; color: #40384b; margin-bottom: 22px; }
+  .why p:last-child { margin-bottom: 0; }
+  .why .hi { color: var(--purple-700); font-weight: 700; }
+  .pull { font-family: var(--serif); font-weight: 700; font-style: normal;
+    font-size: clamp(23px, 3.2vw, 32px); line-height: 1.32; color: var(--purple);
+    margin: 34px 0; padding-left: 26px; border-left: 1px solid var(--purple-300); text-wrap: balance; }
+
+  /* ---- How ---- */
+  .how { padding-block: 84px; }
+  .how .head { max-width: 24ch; margin-bottom: 46px; }
+  .how .head .kicker { display: block; margin-bottom: 14px; }
+  .how h2 { font-size: clamp(28px, 4vw, 42px); line-height: 1.08; }
+  .steps { display: grid; gap: 0; }
+  .stp { display: grid; grid-template-columns: 96px 1fr; gap: 30px; align-items: baseline;
+    padding: 32px 0; border-top: 1px solid var(--line); }
+  .stp:last-child { border-bottom: 1px solid var(--line); }
+  .stp .num { font-family: var(--serif); font-size: 46px; font-weight: 700; color: var(--purple);
+    line-height: 1; font-variant-numeric: tabular-nums; }
+  .stp h3 { font-size: 23px; margin-bottom: 8px; }
+  .stp p { color: var(--muted); font-size: 16.5px; max-width: 56ch; }
+  .stp .stress { color: var(--ink); font-weight: 600; }
+
+  /* ---- Offer ---- */
+  .offer-sec { padding-block: 20px 90px; }
+  .offer { max-width: 620px; margin: 0 auto; border: 1px solid var(--line); border-radius: 20px;
+    overflow: hidden; background: #fff; }
+  .offer .top { padding: 26px 30px; border-bottom: 1px solid var(--line); }
+  .offer .top .k { font-family: var(--serif); font-size: 22px; font-weight: 700; }
+  .offer .top .s { font-size: 14.5px; color: var(--muted); margin-top: 3px; }
+  .offer .rows { padding: 8px 30px 4px; }
+  .row { display: flex; justify-content: space-between; align-items: baseline; gap: 20px;
+    padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .row:last-child { border-bottom: none; }
+  .row .l { font-size: 15.5px; color: var(--ink); font-weight: 600; }
+  .row .l small { display: block; font-size: 13px; color: var(--muted); font-weight: 400; margin-top: 2px; }
+  .row .v { font-weight: 700; font-size: 18px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .row.hoje .v { color: var(--purple); font-size: 30px; }
+  .row.hoje .v .old { font-size: 15px; color: var(--muted); text-decoration: line-through; font-weight: 600; margin-left: 8px; }
+  .row.lucro .v { color: var(--ok); }
+  .offer .foot { padding: 24px 30px 30px; }
+  .offer .foot .btn { width: 100%; justify-content: center; }
+  .offer .foot .mini { text-align: center; font-size: 13.5px; color: var(--muted); margin-top: 14px; }
+
+  /* ---- Highlight utility ---- */
+  .mark-y { background: linear-gradient(transparent 58%, var(--yellow) 58%); padding: 0 3px; }
+
+  /* ---- Product ---- */
+  .product { padding-block: 30px 84px; }
+  .product-grid { display: grid; grid-template-columns: 1.02fr 1fr; gap: 52px; align-items: center; }
+  .product-media { position: relative; }
+  .ph-car { position: relative; aspect-ratio: 1 / 1; border-radius: 22px; overflow: hidden;
+    background: var(--wash); border: 1px solid var(--line); }
+  .ph-track { display: flex; width: 100%; height: 100%; transition: transform .45s var(--ease); }
+  .ph-slide { flex: 0 0 100%; height: 100%; display: grid; place-items: center; }
+  .ph-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .ph-slide.missing { border-style: dashed; border-color: var(--magenta); }
+  .ph-slide.missing::after { content: attr(data-missing); color: var(--magenta-700);
+    font-size: 14px; font-weight: 600; padding: 24px; text-align: center; }
+  .product-media .float-badge { position: absolute; top: -14px; left: -14px; z-index: 4; background: var(--yellow);
+    color: var(--yellow-ink); font-weight: 800; font-size: 13px; letter-spacing: 0.04em;
+    text-transform: uppercase; padding: 10px 15px; border-radius: 12px; transform: rotate(-4deg);
+    box-shadow: 0 10px 24px -12px rgba(0,0,0,0.35); transition: opacity .2s var(--ease); }
+  .ph-car .cbtn { top: 50%; }
+  .ph-car .cbtn.prev { left: 12px; }
+  .ph-car .cbtn.next { right: 12px; }
+  .ph-dots { position: absolute; bottom: 14px; left: 0; right: 0; z-index: 4;
+    display: flex; justify-content: center; gap: 7px; }
+  .ph-dots button { width: 7px; height: 7px; border-radius: 50%; border: none; padding: 0;
+    background: rgba(255,255,255,0.55); cursor: pointer; }
+  .ph-dots button.active { background: #fff; box-shadow: 0 0 0 1.5px var(--purple); }
+  .product-info .kicker { color: var(--magenta); display: block; margin-bottom: 14px; }
+  .product-info h2 { font-size: clamp(28px, 4vw, 40px); line-height: 1.06; margin-bottom: 18px; }
+  .product-info .desc { color: var(--muted); font-size: 16.5px; line-height: 1.6; margin-bottom: 22px; }
+  .atacado { background: var(--yellow); color: var(--yellow-ink); border-radius: 14px;
+    padding: 16px 20px; font-size: 16px; line-height: 1.45; font-weight: 600; margin-bottom: 26px; }
+  .atacado b { font-weight: 800; }
+  .kit-list-label { font-size: 12.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--purple); margin-bottom: 14px; }
+  .itemlist { list-style: none; padding: 0; margin: 0 0 28px; columns: 2; column-gap: 30px; }
+  .itemlist li { break-inside: avoid; display: flex; align-items: baseline; gap: 10px;
+    font-size: 15px; margin-bottom: 11px; }
+  .itemlist .q { flex: none; min-width: 26px; height: 22px; padding: 0 7px; border-radius: 7px;
+    background: var(--magenta); color: #fff; font-size: 12.5px; font-weight: 800; font-variant-numeric: tabular-nums;
+    display: inline-flex; align-items: center; justify-content: center; }
+  .product-info .btn { width: 100%; justify-content: center; }
+
+  /* ---- Feedbacks ---- */
+  .proof { padding: 80px 0; background: var(--wash); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .proof .head { text-align: center; max-width: 30ch; margin: 0 auto 40px; }
+  .proof .head .kicker { color: var(--magenta); display: block; margin-bottom: 12px; }
+  .proof h2 { font-size: clamp(28px, 4vw, 42px); line-height: 1.08; }
+  .vcar { --cardw: clamp(206px, 58vw, 240px); position: relative; max-width: 780px; margin: 0 auto; }
+  .vtrack { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
+    padding: 6px 0; padding-inline: max(4px, calc(50% - var(--cardw) / 2));
+    scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .vtrack::-webkit-scrollbar { display: none; }
+  .vcard { flex: 0 0 auto; width: var(--cardw); scroll-snap-align: center; position: relative; }
+  .vcard video { width: 100%; aspect-ratio: 9 / 16; object-fit: cover; display: block; border-radius: 16px;
+    background: #2A0653; box-shadow: 0 22px 46px -26px rgba(68,10,121,0.5); }
+  .vcard .vposter { border-radius: 16px; padding: 16px 12px; gap: 8px; }
+  .vcard .vposter .playic { width: 44px; height: 44px; }
+  .vcard .vposter .playic svg { width: 16px; height: 16px; }
+  .vcard .vposter .eb { font-size: 10.5px; }
+  .vcard .vposter .big { font-size: clamp(16px, 5.4vw, 19px); max-width: 12ch; }
+  .cbtn { position: absolute; top: 50%; transform: translateY(-50%); width: 46px; height: 46px; border-radius: 50%;
+    border: 1px solid var(--line); background: rgba(255,255,255,0.95); color: var(--purple); cursor: pointer;
+    display: grid; place-items: center; box-shadow: 0 8px 22px -8px rgba(68,10,121,0.35); z-index: 3;
+    transition: background .2s var(--ease), transform .2s var(--ease); }
+  .cbtn:hover { background: #fff; }
+  .cbtn:active { transform: translateY(-50%) scale(0.93); }
+  .cbtn:focus-visible { outline: 3px solid var(--purple-300); outline-offset: 2px; }
+  .cbtn.prev { left: -8px; }
+  .cbtn.next { right: -8px; }
+  .cbtn svg { width: 22px; height: 22px; }
+
+  /* ---- Final ---- */
+  .final { background: var(--purple); color: #fff; padding: 86px 24px; text-align: center; }
+  .final h2 { color: #fff; font-size: clamp(30px, 5vw, 50px); line-height: 1.04; max-width: 18ch; margin: 0 auto; }
+  .final p { color: rgba(255,255,255,0.82); font-size: 18px; margin: 20px auto 34px; max-width: 46ch; }
+  .final .btn { background: #fff; color: var(--purple); font-size: 19px; }
+  .final .btn:hover { background: #F1E9FB; }
+  .final .mini { margin-top: 18px; font-size: 14px; color: rgba(255,255,255,0.7); }
+
+  footer { padding: 44px 24px 60px; text-align: center; color: var(--muted); font-size: 13.5px; }
+  footer b { color: var(--purple); font-family: var(--serif); font-weight: 700; }
+  footer .legal { display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: center; margin-bottom: 16px; }
+  footer .legal a { color: var(--purple); font-weight: 600; text-decoration: none; }
+  footer .legal a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  @media (max-width: 720px) {
+    .why { margin-top: 64px; padding-block: 54px; }
+    .how { padding-block: 60px; }
+    .stp { grid-template-columns: 58px 1fr; gap: 18px; }
+    .stp .num { font-size: 38px; }
+    .final { padding: 64px 24px; }
+    .row.hoje .v { font-size: 26px; }
+    .product { padding-block: 10px 56px; }
+    .product-grid { grid-template-columns: 1fr; gap: 32px; }
+    .product-media .float-badge { left: auto; right: 8px; }
+    .itemlist { columns: 1; }
+    .proof { padding: 56px 0; }
+    .cbtn { width: 40px; height: 40px; }
+    .cbtn.prev { left: -2px; }
+    .cbtn.next { right: -2px; }
+    .vsl,
+    .vsl iframe,
+    .vsl video,
+    .vcard video { background: #2A0653; }
+    .vposter {
+      gap: 13px;
+      padding: 20px 16px;
+      background: linear-gradient(180deg, rgba(18,7,31,0.1), rgba(18,7,31,0.38));
+    }
+    .vsl > .vposter,
+    .vcard .vposter { padding-bottom: 0; }
+    .vposter .playic {
+      width: 58px;
+      height: 58px;
+      background: rgba(255,255,255,0.9);
+      border: 1px solid rgba(88,13,157,0.12);
+      box-shadow: 0 10px 26px -12px rgba(0,0,0,0.42);
+    }
+    .vposter .big {
+      display: block;
+      font-size: clamp(19px, 5.6vw, 24px);
+      max-width: 16ch;
+      color: var(--yellow);
+      text-shadow: 0 2px 12px rgba(0,0,0,0.68);
+    }
+    .vposter .eb {
+      display: block;
+      font-size: 11.5px;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.96);
+      text-shadow: 0 2px 10px rgba(0,0,0,0.64);
+    }
+    .vcard .vposter {
+      gap: 10px;
+      padding-inline: 12px;
+    }
+    .vcard .vposter .playic {
+      width: 50px;
+      height: 50px;
+    }
+    .vcard .vposter .big {
+      font-size: 18px;
+      max-width: 12ch;
+    }
+    .vcard .vposter .eb { font-size: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <div class="logo"><img src="img/logo.png" alt="Dree Maquiagem"></div>
+    <a href="etapa-2.html" class="nav-cta">Quero começar</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="shell">
+    <span class="kicker">Revenda de maquiagem · pague depois de vender</span>
+    <h1>A gente ganha quando <span class="u">você vende.</span> Não quando você compra.</h1>
+    <p class="subhead">Você recebe um kit de maquiagem em casa, vende para quem já te conhece e paga só depois. Para ativar, você investe só <b>R$37</b> do frete. Assista o vídeo e entenda como funciona.</p>
+  </div>
+
+  <div class="vsl-wrap">
+    <div class="vsl" id="mainVsl">
+      <video controls playsinline preload="metadata" poster="img/poster-videoplayback.jpg">
+        <source src="videoplayback.mp4" type="video/mp4">
+        Seu navegador não suporta vídeo. <a href="videoplayback.mp4">Baixar o vídeo</a>.
+      </video>
+      <div class="vposter">
+        <span class="big">como funciona na prática</span>
+        <span class="playic"><svg width="22" height="22" viewBox="0 0 24 24" fill="#580D9D"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="eb">toque para assistir</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="under-vsl">
+    <a href="etapa-2.html" class="btn">Quero minha vaga por R$37 <span class="ar">&rarr;</span></a>
+    <span class="reassure">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E8A5B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      Sem mensalidade e sem contrato. O risco é nosso, não seu.
+    </span>
+  </div>
+</header>
+
+<section class="why">
+  <div class="shell read">
+    <span class="kicker">Por que funciona assim</span>
+    <h2>A gente virou o jogo.</h2>
+    <p>A maioria das marcas cobra <strong>R$300, R$500</strong> num kit lá na frente. O resultado? <span class="hi">8 em cada 10 mulheres travam de medo</span>, não vendem, e ainda saem devendo. É ruim pra ela e é ruim pra marca.</p>
+    <p class="pull">Prefiro ganhar menos por mulher e ter mil revendedoras vendendo de verdade, do que lucrar com poucas que desistem no meio do caminho.</p>
+    <p>Por isso a gente faz diferente: <strong>te entrego o kit e você só me paga depois que vender.</strong> A taxa de R$37 é só o frete e a logística do seu kit. Nada de te cobrar uma fortuna pra depois torcer pra você conseguir vender sozinha.</p>
+  </div>
+</section>
+
+<section class="product shell">
+  <div class="product-grid">
+    <div class="product-media">
+      <span class="float-badge" id="phBadge">Preço de atacado</span>
+      <div class="ph-car">
+        <div class="ph-track" id="phTrack">
+          <div class="ph-slide" data-missing="Salve a imagem em  img/kit-loja-10.webp">
+            <img src="img/kit-loja-10.webp" alt="Kit Revenda Loja de 10 com mais de 35 itens de maquiagem" onerror="this.style.display='none';this.parentNode.classList.add('missing')">
+          </div>
+          <div class="ph-slide" data-missing="Salve a imagem em  img/feedback-1.webp">
+            <img src="img/feedback-1.webp" alt="Print de feedback de revendedora que vendeu o kit em menos de 2 semanas" onerror="this.style.display='none';this.parentNode.classList.add('missing')">
+          </div>
+          <div class="ph-slide" data-missing="Salve a imagem em  img/feedback-2.webp">
+            <img src="img/feedback-2.webp" alt="Print de feedback de revendedora que vendeu todos os produtos do kit" onerror="this.style.display='none';this.parentNode.classList.add('missing')">
+          </div>
+        </div>
+        <button class="cbtn prev" id="phPrev" aria-label="Imagem anterior">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18 9 12l6-6"/></svg>
+        </button>
+        <button class="cbtn next" id="phNext" aria-label="Próxima imagem">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+        <div class="ph-dots" id="phDots">
+          <button class="active" aria-label="Ver foto do kit"></button>
+          <button aria-label="Ver feedback 1"></button>
+          <button aria-label="Ver feedback 2"></button>
+        </div>
+      </div>
+    </div>
+    <div class="product-info">
+      <span class="kicker">O que você recebe</span>
+      <h2>Kit Revenda Loja de 10</h2>
+      <p class="desc">Um kit pronto para revenda, já selecionado por quem acompanha as tendências do mercado de beleza. A gente pesquisa o que está em alta e monta um kit de itens que se vendem sozinhos, pra você não perder tempo garimpando fornecedor.</p>
+      <div class="atacado">Tudo a <b>preço de atacado</b>, com <b>lista de preço sugerido</b>. Você revende <b>pelo dobro</b> do que pagou.</div>
+      <div class="kit-list-label">Itens inclusos (referência atual)</div>
+      <ul class="itemlist">
+        <li><span class="q">1</span> Pó Solto Lovely (FaceBeautiful)</li>
+        <li><span class="q">2</span> Cílios Postiços</li>
+        <li><span class="q">2</span> Cola para Cílios (EYE)</li>
+        <li><span class="q">1</span> Sabonete Líquido (Luluboo)</li>
+        <li><span class="q">2</span> Batom</li>
+        <li><span class="q">2</span> Lip Gloss</li>
+        <li><span class="q">2</span> Lápis Retrátil Preto</li>
+        <li><span class="q">2</span> Delineador (Ruby Rose)</li>
+        <li><span class="q">2</span> Touca de Cetim</li>
+        <li><span class="q">2</span> Faixa de Cabelo</li>
+        <li><span class="q">12</span> Máscara Facial (sachê)</li>
+        <li><span class="q">3</span> Pinça</li>
+        <li><span class="q">3</span> Esponja de Maquiagem</li>
+      </ul>
+      <a href="etapa-2.html" class="btn">Quero esse kit por R$37 <span class="ar">&rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="how shell">
+  <div class="head">
+    <span class="kicker">Como funciona</span>
+    <h2>Três passos, sem pegadinha.</h2>
+  </div>
+  <div class="steps">
+    <div class="stp">
+      <div class="num">1</div>
+      <div>
+        <h3>Ative sua vaga</h3>
+        <p>Você investe R$37 do frete e a gente separa e envia o seu kit com <span class="stress">40 itens de maquiagem</span> direto para a sua casa.</p>
+      </div>
+    </div>
+    <div class="stp">
+      <div class="num">2</div>
+      <div>
+        <h3>Receba e venda</h3>
+        <p>O kit chega pronto para vender, com as fotos e a tabela de preços. Você revende para amigas, vizinhas e no WhatsApp, e pode <span class="stress">faturar até R$350</span>.</p>
+      </div>
+    </div>
+    <div class="stp">
+      <div class="num">3</div>
+      <div>
+        <h3>Pague depois de vender</h3>
+        <p>Só quando o kit já estiver vendido você acerta o restante por Pix, <span class="stress">com o dinheiro que já entrou no seu bolso</span>. O lucro fica com você.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="proof">
+  <div class="shell">
+    <div class="head">
+      <span class="kicker">Feedbacks reais</span>
+      <h2>Quem deu o primeiro passo, vendeu.</h2>
+    </div>
+    <div class="vcar">
+      <button class="cbtn prev" aria-label="Vídeo anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18 9 12l6-6"/></svg>
+      </button>
+      <div class="vtrack" id="vtrack">
+        <div class="vcard">
+          <video src="feedback.mp4" controls playsinline preload="metadata" poster="img/poster-feedback.jpg"></video>
+          <div class="vposter">
+            <span class="big">ela vendeu tudo</span>
+            <span class="playic"><svg width="16" height="16" viewBox="0 0 24 24" fill="#580D9D"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="eb">toque para ver</span>
+          </div>
+        </div>
+        <div class="vcard">
+          <video src="feedback2.mp4" controls playsinline preload="metadata" poster="img/poster-feedback2.jpg"></video>
+          <div class="vposter">
+            <span class="big">medo virou coragem</span>
+            <span class="playic"><svg width="16" height="16" viewBox="0 0 24 24" fill="#580D9D"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="eb">toque para ver</span>
+          </div>
+        </div>
+        <div class="vcard">
+          <video src="feedback3.mp4" controls playsinline preload="metadata" poster="img/poster-feedback3.jpg"></video>
+          <div class="vposter">
+            <span class="big">chegou e já vendeu</span>
+            <span class="playic"><svg width="16" height="16" viewBox="0 0 24 24" fill="#580D9D"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="eb">toque para ver</span>
+          </div>
+        </div>
+      </div>
+      <button class="cbtn next" aria-label="Próximo vídeo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="offer-sec shell">
+  <div class="offer">
+    <div class="top">
+      <div class="k">Kit Loja de 10</div>
+      <div class="s">40 itens de maquiagem para revenda</div>
+    </div>
+    <div class="rows">
+      <div class="row hoje">
+        <span class="l">Você paga hoje<small>frete e logística, já abate do kit</small></span>
+        <span class="v">R$37<span class="old">R$149,90</span></span>
+      </div>
+      <div class="row">
+        <span class="l">Depois de vender<small>acerta por Pix, sem pressa</small></span>
+        <span class="v">R$112,90</span>
+      </div>
+      <div class="row lucro">
+        <span class="l">Você fatura até<small>lucro de até ~R$200 no seu bolso</small></span>
+        <span class="v">R$350</span>
+      </div>
+    </div>
+    <div class="foot">
+      <a href="etapa-2.html" class="btn">Ativar minha vaga por R$37 <span class="ar">&rarr;</span></a>
+      <p class="mini">Você recebe o código de rastreio no WhatsApp.</p>
+    </div>
+  </div>
+</section>
+
+<section id="comecar" class="final">
+  <h2>Sua renda extra pode começar esta semana.</h2>
+  <p>Ative sua vaga por R$37, receba seu kit e comece a vender. O resto você paga só depois.</p>
+  <a href="etapa-2.html" class="btn">Quero minha vaga por R$37 <span class="ar">&rarr;</span></a>
+  <p class="mini">Vagas limitadas com envio ainda esta semana.</p>
+</section>
+
+<footer>
+  <div class="legal">
+    <a href="privacidade.html">Política de Privacidade</a>
+    <a href="termos.html">Termos de Uso</a>
+    <a href="trocas-reembolso.html">Trocas e Reembolso</a>
+    <a href="cookies.html">Aviso de Cookies</a>
+  </div>
+  <p><b>Dree Maquiagem</b> · transformando empreendedoras iniciantes em empreendedoras de sucesso.</p>
+  <p>© 2026 Dree Maquiagem · Todos os direitos reservados.</p>
+</footer>
+
+<script>window.DREE_FUNNEL = { step: 'home' };</script>
+<script src="assets/js/funnel-tracker.js"></script>
+<script>
+  (function () {
+    var phTrack = document.getElementById('phTrack');
+    if (phTrack) {
+      var phSlides = phTrack.querySelectorAll('.ph-slide');
+      var phDots = document.querySelectorAll('#phDots button');
+      var phBadge = document.getElementById('phBadge');
+      var badges = ['Preço de atacado', 'Feedback real', 'Feedback real'];
+      var idx = 0;
+      function goToSlide(n) {
+        idx = (n + phSlides.length) % phSlides.length;
+        phTrack.style.transform = 'translateX(-' + (idx * 100) + '%)';
+        phDots.forEach(function (d, i) { d.classList.toggle('active', i === idx); });
+        if (phBadge) phBadge.textContent = badges[idx];
+      }
+      document.getElementById('phPrev').addEventListener('click', function () { goToSlide(idx - 1); });
+      document.getElementById('phNext').addEventListener('click', function () { goToSlide(idx + 1); });
+      phDots.forEach(function (d, i) { d.addEventListener('click', function () { goToSlide(i); }); });
+    }
+
+    var track = document.getElementById('vtrack');
+    if (!track) return;
+    function step(dir) {
+      var card = track.querySelector('.vcard');
+      var w = card.getBoundingClientRect().width + 16;
+      track.scrollBy({ left: dir * w, behavior: 'smooth' });
+    }
+    var prev = document.querySelector('.cbtn.prev');
+    var next = document.querySelector('.cbtn.next');
+    if (prev) prev.addEventListener('click', function () { step(-1); });
+    if (next) next.addEventListener('click', function () { step(1); });
+    var vids = track.querySelectorAll('video');
+    vids.forEach(function (v) {
+      v.addEventListener('play', function () {
+        vids.forEach(function (o) { if (o !== v) o.pause(); });
+        var poster = v.parentElement.querySelector('.vposter');
+        if (poster) poster.style.display = 'none';
+      });
+    });
+  })();
+
+  (function () {
+    var mainVsl = document.getElementById('mainVsl');
+    if (!mainVsl) return;
+    var v = mainVsl.querySelector('video');
+    v.addEventListener('play', function () { mainVsl.classList.add('played'); });
+  })();
+</script>
+</body>
+</html>

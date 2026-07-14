@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dree Maquiagem - Dashboard do funil</title>
+<style>
+  :root {
+    color-scheme: light;
+    --bg: oklch(97.5% 0.01 318);
+    --surface: oklch(99% 0.006 318);
+    --panel: oklch(100% 0.006 318);
+    --ink: oklch(20% 0.03 318);
+    --muted: oklch(48% 0.035 318);
+    --line: oklch(90% 0.02 318);
+    --soft: oklch(94% 0.035 318);
+    --purple: oklch(39% 0.19 318);
+    --magenta: oklch(56% 0.24 350);
+    --green: oklch(53% 0.14 155);
+    --yellow: oklch(87% 0.16 95);
+    --warn: oklch(62% 0.16 45);
+    --shadow: 0 16px 45px -34px oklch(24% 0.08 318 / 0.55);
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  button, input, select {
+    font: inherit;
+  }
+
+  .app {
+    min-height: 100vh;
+  }
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: color-mix(in oklch, var(--surface) 92%, transparent);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(14px);
+  }
+
+  .topbar-in {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 14px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .mark {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: var(--purple);
+    color: var(--surface);
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 18px;
+    letter-spacing: 0;
+  }
+
+  .sub {
+    margin-top: 1px;
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .control,
+  .btn {
+    height: 36px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: var(--ink);
+    padding: 0 12px;
+    box-shadow: none;
+  }
+
+  .control {
+    min-width: 116px;
+  }
+
+  .key-input {
+    width: 180px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    cursor: pointer;
+    font-weight: 650;
+  }
+
+  .btn.primary {
+    background: var(--purple);
+    border-color: var(--purple);
+    color: var(--surface);
+  }
+
+  .btn:focus-visible,
+  .control:focus-visible {
+    outline: 3px solid color-mix(in oklch, var(--purple) 24%, transparent);
+    outline-offset: 2px;
+  }
+
+  main {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 24px 22px 44px;
+  }
+
+  .notice {
+    display: none;
+    margin-bottom: 16px;
+    padding: 12px 14px;
+    border: 1px solid color-mix(in oklch, var(--warn) 36%, var(--line));
+    background: color-mix(in oklch, var(--yellow) 20%, var(--surface));
+    border-radius: 8px;
+    color: var(--ink);
+  }
+
+  .notice.show {
+    display: block;
+  }
+
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .metric,
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+  }
+
+  .metric {
+    padding: 16px;
+    min-height: 108px;
+  }
+
+  .metric .label {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 650;
+  }
+
+  .metric .value {
+    margin-top: 10px;
+    font-size: 30px;
+    line-height: 1;
+    font-weight: 760;
+    letter-spacing: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .metric .hint {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(280px, 0.75fr);
+    gap: 14px;
+    margin-top: 14px;
+  }
+
+  .panel {
+    padding: 16px;
+  }
+
+  .panel-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 14px;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 15px;
+    letter-spacing: 0;
+  }
+
+  .stamp {
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .funnel {
+    display: grid;
+    gap: 10px;
+  }
+
+  .stage {
+    display: grid;
+    grid-template-columns: 138px minmax(0, 1fr) 116px;
+    gap: 12px;
+    align-items: center;
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .stage:first-child {
+    border-top: 0;
+  }
+
+  .stage-name {
+    font-weight: 700;
+  }
+
+  .stage-meta {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 2px;
+  }
+
+  .bar-track {
+    height: 36px;
+    background: var(--soft);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+
+  .bar {
+    min-width: 4px;
+    height: 100%;
+    border-radius: 7px;
+    background: linear-gradient(90deg, var(--purple), var(--magenta));
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: var(--surface);
+    font-size: 12px;
+    font-weight: 760;
+    padding-right: 10px;
+    transition: width .18s cubic-bezier(.22, 1, .36, 1);
+    white-space: nowrap;
+  }
+
+  .stage-stats {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .stage-stats b {
+    display: block;
+    font-size: 15px;
+  }
+
+  .stage-stats span {
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .insights {
+    display: grid;
+    gap: 10px;
+  }
+
+  .insight {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px;
+    background: var(--surface);
+  }
+
+  .insight .k {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 650;
+  }
+
+  .insight .v {
+    margin-top: 6px;
+    font-size: 18px;
+    font-weight: 760;
+  }
+
+  .insight .d {
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .table-panel {
+    margin-top: 14px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  th,
+  td {
+    padding: 11px 10px;
+    text-align: left;
+    border-top: 1px solid var(--line);
+    vertical-align: top;
+  }
+
+  th {
+    color: var(--muted);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    font-weight: 750;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    height: 24px;
+    padding: 0 8px;
+    border-radius: 999px;
+    background: var(--soft);
+    color: var(--ink);
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .pill.paid {
+    background: color-mix(in oklch, var(--green) 18%, var(--surface));
+    color: color-mix(in oklch, var(--green) 76%, var(--ink));
+  }
+
+  .empty {
+    padding: 34px 16px;
+    text-align: center;
+    color: var(--muted);
+    border: 1px dashed var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+  }
+
+  .skeleton {
+    min-height: 360px;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+  }
+
+  @media (max-width: 900px) {
+    .topbar-in {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .controls {
+      justify-content: flex-start;
+      width: 100%;
+    }
+
+    .metric-grid,
+    .layout {
+      grid-template-columns: 1fr;
+    }
+
+    .stage {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    .stage-stats {
+      text-align: left;
+    }
+
+    table {
+      min-width: 720px;
+    }
+
+    .table-scroll {
+      overflow-x: auto;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="topbar-in">
+      <div class="brand">
+        <div class="mark">D</div>
+        <div>
+          <h1>Dashboard do funil</h1>
+          <div class="sub">Dree Maquiagem · etapas, saídas e tempo médio</div>
+        </div>
+      </div>
+      <div class="controls">
+        <select class="control" id="days">
+          <option value="1">Hoje</option>
+          <option value="7" selected>7 dias</option>
+          <option value="30">30 dias</option>
+          <option value="90">90 dias</option>
+        </select>
+        <input class="control key-input" id="key" type="password" placeholder="Chave interna">
+        <button class="btn" id="saveKey" type="button">Salvar chave</button>
+        <button class="btn primary" id="refresh" type="button">Atualizar</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="notice" id="notice"></div>
+
+    <section class="metric-grid" aria-label="Resumo">
+      <div class="metric">
+        <div class="label">Sessões</div>
+        <div class="value" id="sessions">0</div>
+        <div class="hint" id="visitors">0 visitantes únicos</div>
+      </div>
+      <div class="metric">
+        <div class="label">Conversão final</div>
+        <div class="value" id="conversion">0%</div>
+        <div class="hint" id="paid">0 pagamentos</div>
+      </div>
+      <div class="metric">
+        <div class="label">Maior saída</div>
+        <div class="value" id="bottleneckValue">0%</div>
+        <div class="hint" id="bottleneckLabel">Sem dados ainda</div>
+      </div>
+      <div class="metric">
+        <div class="label">Mais tempo</div>
+        <div class="value" id="slowestValue">0s</div>
+        <div class="hint" id="slowestLabel">Sem dados ainda</div>
+      </div>
+    </section>
+
+    <section class="layout">
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Funil por etapa</h2>
+          <div class="stamp" id="stamp">Atualizando...</div>
+        </div>
+        <div class="funnel" id="funnel">
+          <div class="skeleton">Carregando métricas</div>
+        </div>
+      </div>
+
+      <aside class="panel">
+        <div class="panel-head">
+          <h2>Leituras rápidas</h2>
+        </div>
+        <div class="insights">
+          <div class="insight">
+            <div class="k">Onde o lead fica</div>
+            <div class="v" id="stayStage">Sem dados</div>
+            <div class="d" id="stayText">O tempo médio aparece quando houver navegação suficiente.</div>
+          </div>
+          <div class="insight">
+            <div class="k">Onde o lead sai</div>
+            <div class="v" id="exitStage">Sem dados</div>
+            <div class="d" id="exitText">As saídas são calculadas pela última etapa atingida.</div>
+          </div>
+          <div class="insight">
+            <div class="k">Eventos capturados</div>
+            <div class="v" id="events">0</div>
+            <div class="d" id="storage">Memória temporária</div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="panel table-panel">
+      <div class="panel-head">
+        <h2>Sessões recentes</h2>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Última etapa</th>
+              <th>Evento</th>
+              <th>Origem</th>
+              <th>Última atividade</th>
+              <th>Sessão</th>
+            </tr>
+          </thead>
+          <tbody id="recent">
+            <tr><td colspan="5">Carregando...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+(function () {
+  var stageLabels = {
+    home: 'Página inicial',
+    etapa_2: 'Etapa 2',
+    checkout: 'Checkout',
+    pix: 'Pix gerado',
+    paid: 'Pago'
+  };
+
+  var keyInput = document.getElementById('key');
+  var daysInput = document.getElementById('days');
+  var notice = document.getElementById('notice');
+
+  keyInput.value = sessionStorage.getItem('dree_dashboard_key') || '';
+
+  function fmtNumber(value) {
+    return new Intl.NumberFormat('pt-BR').format(value || 0);
+  }
+
+  function fmtPct(value) {
+    return (Number(value || 0)).toLocaleString('pt-BR', {
+      minimumFractionDigits: value % 1 ? 1 : 0,
+      maximumFractionDigits: 1
+    }) + '%';
+  }
+
+  function fmtTime(ms) {
+    var seconds = Math.round((Number(ms || 0)) / 1000);
+    if (seconds < 60) return seconds + 's';
+    var minutes = Math.floor(seconds / 60);
+    var rest = seconds % 60;
+    if (minutes < 60) return minutes + 'm ' + rest + 's';
+    var hours = Math.floor(minutes / 60);
+    return hours + 'h ' + (minutes % 60) + 'm';
+  }
+
+  function fmtDate(value) {
+    if (!value) return '-';
+    var date = new Date(value);
+    if (Number.isNaN(date.getTime())) return '-';
+    return new Intl.DateTimeFormat('pt-BR', {
+      dateStyle: 'short',
+      timeStyle: 'short'
+    }).format(date);
+  }
+
+  function showNotice(message, type) {
+    notice.textContent = message;
+    notice.className = 'notice show';
+    if (type === 'hide') notice.className = 'notice';
+  }
+
+  function stagePill(stage) {
+    var cls = stage === 'paid' ? 'pill paid' : 'pill';
+    return '<span class="' + cls + '">' + (stageLabels[stage] || stage || '-') + '</span>';
+  }
+
+  function renderFunnel(stages) {
+    var first = stages[0] && stages[0].count ? stages[0].count : 0;
+    var html = stages.map(function (stage) {
+      var width = first ? Math.max(3, stage.count / first * 100) : 0;
+      return [
+        '<div class="stage">',
+          '<div>',
+            '<div class="stage-name">' + stage.label + '</div>',
+            '<div class="stage-meta">' + fmtNumber(stage.count) + ' sessões · ' + fmtPct(stage.fromStartPct) + ' do início</div>',
+          '</div>',
+          '<div class="bar-track">',
+            '<div class="bar" style="width:' + width + '%">' + fmtPct(stage.conversionFromPreviousPct) + '</div>',
+          '</div>',
+          '<div class="stage-stats">',
+            '<b>' + fmtNumber(stage.dropoff) + ' saídas</b>',
+            '<span>' + fmtPct(stage.dropoffPct) + ' queda · ' + fmtTime(stage.avgTimeMs) + '</span>',
+          '</div>',
+        '</div>'
+      ].join('');
+    }).join('');
+
+    document.getElementById('funnel').innerHTML = html || '<div class="empty">Ainda não há eventos suficientes para montar o funil.</div>';
+  }
+
+  function renderRecent(rows) {
+    var body = document.getElementById('recent');
+    if (!rows.length) {
+      body.innerHTML = '<tr><td colspan="5">Nenhuma sessão registrada no período.</td></tr>';
+      return;
+    }
+
+    body.innerHTML = rows.map(function (row) {
+      return [
+        '<tr>',
+          '<td>' + stagePill(row.reached) + '</td>',
+          '<td>' + (row.lastEvent || '-') + '</td>',
+          '<td>' + (row.source || 'direto') + '</td>',
+          '<td>' + fmtDate(row.lastSeenAt) + '</td>',
+          '<td>' + (row.sessionId || '').slice(0, 24) + '</td>',
+        '</tr>'
+      ].join('');
+    }).join('');
+  }
+
+  function render(data) {
+    document.getElementById('sessions').textContent = fmtNumber(data.totals.sessions);
+    document.getElementById('visitors').textContent = fmtNumber(data.totals.visitors) + ' visitantes únicos';
+    document.getElementById('conversion').textContent = fmtPct(data.totals.conversionPct);
+    document.getElementById('paid').textContent = fmtNumber(data.totals.paid) + ' pagamentos';
+    document.getElementById('events').textContent = fmtNumber(data.totals.events);
+    document.getElementById('storage').textContent = data.persistent ? 'Persistência ativa' : 'Memória temporária local';
+    document.getElementById('stamp').textContent = 'Atualizado em ' + fmtDate(data.generatedAt);
+
+    if (data.bottleneck) {
+      document.getElementById('bottleneckValue').textContent = fmtPct(data.bottleneck.dropoffPct);
+      document.getElementById('bottleneckLabel').textContent = 'queda antes de ' + data.bottleneck.label;
+      document.getElementById('exitStage').textContent = data.bottleneck.label;
+      document.getElementById('exitText').textContent = fmtNumber(data.bottleneck.dropoff) + ' sessões não avançaram para essa etapa.';
+    }
+
+    if (data.slowest) {
+      document.getElementById('slowestValue').textContent = fmtTime(data.slowest.avgTimeMs);
+      document.getElementById('slowestLabel').textContent = data.slowest.label;
+      document.getElementById('stayStage').textContent = data.slowest.label;
+      document.getElementById('stayText').textContent = 'Tempo médio de ' + fmtTime(data.slowest.avgTimeMs) + ' nessa etapa.';
+    }
+
+    if (!data.persistent) {
+      showNotice('As métricas estão em memória temporária. Para produção, conecte Redis/KV e defina KV_REST_API_URL e KV_REST_API_TOKEN na Vercel.');
+    } else {
+      showNotice('', 'hide');
+    }
+
+    renderFunnel(data.stages || []);
+    renderRecent(data.recentSessions || []);
+  }
+
+  function load() {
+    var key = keyInput.value.trim();
+    var url = '/api/metrics/summary?days=' + encodeURIComponent(daysInput.value);
+    document.getElementById('funnel').innerHTML = '<div class="skeleton">Carregando métricas</div>';
+
+    return fetch(url, {
+      headers: key ? { 'x-dashboard-key': key } : {}
+    })
+      .then(function (response) {
+        return response.json().then(function (data) {
+          if (!response.ok) throw new Error(data.message || 'Não foi possível carregar.');
+          return data;
+        });
+      })
+      .then(render)
+      .catch(function (error) {
+        showNotice(error.message || 'Não foi possível carregar as métricas.');
+        document.getElementById('funnel').innerHTML = '<div class="empty">Informe a chave interna correta e tente atualizar.</div>';
+      });
+  }
+
+  document.getElementById('saveKey').addEventListener('click', function () {
+    sessionStorage.setItem('dree_dashboard_key', keyInput.value.trim());
+    load();
+  });
+
+  document.getElementById('refresh').addEventListener('click', load);
+  daysInput.addEventListener('change', load);
+
+  load();
+})();
+</script>
+</body>
+</html>

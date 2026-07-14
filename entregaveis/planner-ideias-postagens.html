@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dree Maquiagem — Planner de Ideias de Postagens (30 dias)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --purple:#580D9D; --purple-700:#440A79; --purple-300:#8B4FC9;
+    --magenta:#E4148C; --magenta-700:#B70E6F;
+    --yellow:#FFDD00; --yellow-ink:#3A2A00;
+    --wash:#F6F1FC; --wash-2:#EEE4F9; --line:#E9E2F1;
+    --ground:#FEFDFF; --ink:#1B1520; --muted:#6B6376;
+    --ok:#1E8A5B; --ok-soft:#E4F3EB;
+    --serif:"Poppins","Montserrat",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    --sans:"Montserrat",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+  body{margin:0; background:var(--wash); color:var(--ink); font-family:var(--sans); font-size:11pt; line-height:1.55; -webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4{font-family:var(--serif); font-weight:700; margin:0; letter-spacing:-0.015em; line-height:1.12;}
+  p{margin:0 0 10px;}
+  strong,b{font-weight:700;}
+  em{font-style:normal; color:var(--magenta-700); font-weight:700;}
+  ul,ol{margin:0 0 12px; padding-left:20px;}
+  li{margin:0 0 7px;}
+
+  .page{width:210mm; min-height:297mm; margin:0 auto 14px; background:var(--ground); padding:24mm 20mm 22mm; position:relative; box-shadow:0 10px 40px rgba(88,13,157,.10); display:flex; flex-direction:column;}
+  .foot{position:absolute; left:20mm; right:20mm; bottom:11mm; display:flex; align-items:center; justify-content:space-between; font-size:8.5pt; color:var(--muted); letter-spacing:.04em;}
+  .foot .fmark{text-transform:uppercase; letter-spacing:.14em; font-weight:700; color:var(--purple);}
+  .brandline{color:var(--muted); font-size:9pt; font-weight:700; letter-spacing:.14em; text-transform:uppercase;}
+  .brandline b{color:var(--purple);}
+
+  /* cover */
+  .cover{background:radial-gradient(120% 90% at 100% 0%, rgba(228,20,140,.30), transparent 55%),radial-gradient(120% 90% at 0% 100%, rgba(255,221,0,.22), transparent 55%),linear-gradient(160deg,#5b0fa2 0%, #440A79 60%, #350862 100%); color:#fff; justify-content:space-between; padding:30mm 20mm;}
+  .cover .top{display:flex; align-items:center; justify-content:space-between;}
+  .cover .logo{font-family:var(--serif); font-weight:800; font-size:22pt; color:#fff;}
+  .cover .logo span{color:var(--yellow);}
+  .cover .logo i{display:block; font-style:normal; font-family:var(--sans); font-weight:700; font-size:8pt; letter-spacing:.32em; text-transform:uppercase; color:rgba(255,255,255,.72); margin-top:2px;}
+  .cover .tagpill{border:1.5px solid rgba(255,255,255,.4); border-radius:999px; padding:7px 15px; font-size:8.5pt; font-weight:800; letter-spacing:.16em; text-transform:uppercase;}
+  .cover .mid{margin:auto 0;}
+  .cover .kicker{display:inline-block; background:var(--yellow); color:var(--yellow-ink); font-weight:800; font-size:9pt; letter-spacing:.14em; text-transform:uppercase; padding:8px 14px; border-radius:8px; margin-bottom:22px;}
+  .cover h1{font-size:38pt; line-height:1.03; font-weight:800; text-wrap:balance; margin-bottom:16px;}
+  .cover h1 em{color:var(--yellow); font-style:normal;}
+  .cover .sub{font-size:13pt; color:rgba(255,255,255,.9); max-width:36ch; line-height:1.45;}
+  .cover .bottom{border-top:1px solid rgba(255,255,255,.22); padding-top:16px; display:flex; align-items:flex-end; justify-content:space-between; gap:20px;}
+  .cover .bottom .who{font-family:var(--serif); font-weight:700; font-size:12pt; color:#fff;}
+  .cover .bottom p{margin:0; font-size:10pt; color:rgba(255,255,255,.82);}
+  .cover .seals{display:flex; gap:8px; flex-wrap:wrap;}
+  .cover .seal{border:1px solid rgba(255,255,255,.35); border-radius:999px; padding:6px 12px; font-size:8pt; font-weight:700;}
+
+  .chapstart{border-left:5px solid var(--magenta); padding:2px 0 2px 16px; margin:0 0 16px;}
+  .chapstart .ch-n{font-size:9pt; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:var(--magenta);}
+  .chapstart h2{font-size:22pt; margin-top:6px; color:var(--purple-700);}
+  .chapstart .lead{margin-top:9px; color:var(--muted); font-size:10.5pt; max-width:62ch;}
+  h3{font-size:13pt; color:var(--purple); margin:16px 0 8px;}
+
+  .callout{background:var(--wash); border:1px solid var(--line); border-left:4px solid var(--purple); border-radius:12px; padding:13px 15px; margin:12px 0;}
+  .callout.pink{border-left-color:var(--magenta); background:#fdf0f8;}
+  .callout.gold{border-left-color:var(--yellow); background:#fffbe6;}
+  .callout .ttl{font-family:var(--serif); font-weight:700; font-size:10.5pt; color:var(--purple-700); margin-bottom:5px;}
+  .callout.pink .ttl{color:var(--magenta-700);}
+  .callout p:last-child{margin-bottom:0;}
+
+  .pillars{display:grid; grid-template-columns:1fr 1fr; gap:11px; margin:12px 0;}
+  .pillar{background:var(--wash); border:1px solid var(--line); border-radius:12px; padding:13px 14px;}
+  .pillar .tag{display:inline-block; font-size:8pt; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:#fff; background:var(--magenta); padding:3px 9px; border-radius:999px; margin-bottom:8px;}
+  .pillar h4{font-size:11.5pt; margin:0 0 4px; color:var(--purple-700);}
+  .pillar p{font-size:9.5pt; color:var(--muted); margin:0;}
+
+  table{width:100%; border-collapse:collapse; margin:10px 0; font-size:9pt;}
+  th,td{text-align:left; padding:7px 9px; border-bottom:1px solid var(--line); vertical-align:top;}
+  th{background:var(--purple); color:#fff; font-family:var(--serif); font-weight:700; font-size:8.5pt; letter-spacing:.02em;}
+  tr:nth-child(even) td{background:var(--wash);}
+  td .d{font-family:var(--serif); font-weight:800; color:var(--magenta-700);}
+  .pill{display:inline-block; font-size:7.5pt; font-weight:800; letter-spacing:.04em; text-transform:uppercase; padding:2px 7px; border-radius:999px; white-space:nowrap;}
+  .pill.v{background:#efe3fb; color:var(--purple);}      /* vitrine */
+  .pill.p{background:#e2f3ea; color:var(--ok);}          /* prova */
+  .pill.e{background:#fde3f2; color:var(--magenta-700);} /* engajamento */
+  .pill.o{background:#fff3bf; color:var(--yellow-ink);}  /* oferta */
+  .pill.b{background:#e6eefb; color:#2b4a8b;}            /* bastidor */
+  td.cap{font-style:italic; color:var(--ink);}
+
+  .legend{display:flex; gap:10px; flex-wrap:wrap; margin:6px 0 2px; font-size:8.5pt; color:var(--muted);}
+  .legend span{display:inline-flex; align-items:center; gap:5px;}
+  .dot{width:9px; height:9px; border-radius:3px; display:inline-block;}
+
+  .bank{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:10px 0;}
+  .bank .col{background:var(--wash); border:1px solid var(--line); border-radius:12px; padding:12px 14px;}
+  .bank h4{font-size:10.5pt; color:var(--purple-700); margin:0 0 7px;}
+  .bank ul{margin:0; padding-left:16px;}
+  .bank li{font-size:9.5pt; margin-bottom:6px;}
+
+  /* blank weekly planner */
+  .wk{width:100%; border-collapse:collapse; margin:10px 0; font-size:9pt;}
+  .wk th{background:var(--purple); color:#fff; padding:8px; font-family:var(--serif); font-size:8.5pt;}
+  .wk td{border:1px solid var(--line); height:26mm; vertical-align:top; padding:7px 8px; width:14.28%;}
+  .wk td .lbl{font-size:7.5pt; color:var(--muted); text-transform:uppercase; letter-spacing:.06em;}
+  .writeline{border:1px solid var(--line); border-radius:10px; padding:10px 12px; margin:8px 0; min-height:14mm;}
+  .writeline .h{font-size:8.5pt; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--purple); margin-bottom:6px;}
+
+  @media print{
+    body{background:#fff;}
+    .page{margin:0; box-shadow:none; page-break-after:always; break-after:page; min-height:auto; height:297mm; overflow:hidden;}
+    .page:last-child{page-break-after:auto;}
+    .noprint{display:none!important;}
+  }
+  @page{size:A4; margin:0;}
+  .bar{position:fixed; top:16px; right:16px; z-index:50;}
+  .bar button{font-family:var(--sans); font-weight:800; font-size:10pt; border:none; border-radius:999px; padding:11px 18px; cursor:pointer; background:var(--magenta); color:#fff; box-shadow:0 6px 20px rgba(88,13,157,.28);}
+</style>
+</head>
+<body>
+
+<div class="bar noprint"><button onclick="window.print()">⬇ Baixar / Imprimir PDF</button></div>
+
+<!-- CAPA -->
+<section class="page cover">
+  <div class="top">
+    <div class="logo">Dree<span>.</span><i>Maquiagem</i></div>
+    <div class="tagpill">Planner de Conteúdo</div>
+  </div>
+  <div class="mid">
+    <span class="kicker">30 dias de postagens</span>
+    <h1>Nunca mais fique <em>sem saber o que postar</em></h1>
+    <p class="sub">Um mês inteiro de ideias e legendas prontas para você atrair clientes e vender maquiagem todos os dias.</p>
+  </div>
+  <div class="bottom">
+    <div>
+      <p class="who">Planner de Ideias de Postagens</p>
+      <p>Calendário editorial · Edição 2025</p>
+    </div>
+    <div class="seals">
+      <div class="seal">Legendas prontas</div>
+      <div class="seal">Banco de ganchos</div>
+      <div class="seal">Planner em branco</div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO USAR + PILARES -->
+<section class="page">
+  <div class="brandline"><b>Dree</b> Maquiagem · Planner de Postagens</div>
+  <div class="chapstart" style="margin-top:14px;">
+    <div class="ch-n">Comece por aqui</div>
+    <h2>Como usar este planner</h2>
+    <p class="lead">Postar todo dia é o que faz cliente aparecer. O problema nunca é a preguiça — é o "não sei o que postar". Este planner resolve isso: já vem tudo pronto.</p>
+  </div>
+
+  <ol>
+    <li><b>Siga o calendário de 30 dias.</b> Cada dia tem um tipo de post, a ideia e uma legenda pronta pra copiar.</li>
+    <li><b>Adapte a legenda</b> ao seu jeito e ao produto que você tem em estoque. É pra soar como você.</li>
+    <li><b>Poste no melhor horário</b> (geralmente 12h e 19h) no feed, stories ou status do WhatsApp.</li>
+    <li><b>Sem ideia num dia?</b> Vá ao <em>Banco de Ganchos</em> e monte um post na hora.</li>
+  </ol>
+
+  <h3>Os 5 pilares de conteúdo que vendem</h3>
+  <p>Todo bom perfil equilibra 5 tipos de post. O calendário já faz esse rodízio por você:</p>
+  <div class="pillars">
+    <div class="pillar"><span class="tag">Vitrine</span><h4>Mostrar o produto</h4><p>A maquiagem, a cor, o combo, o preço. É a sua prateleira digital.</p></div>
+    <div class="pillar"><span class="tag" style="background:var(--ok)">Prova</span><h4>Provar que funciona</h4><p>Você usando, antes/depois, print de cliente feliz. Gera confiança.</p></div>
+    <div class="pillar"><span class="tag" style="background:var(--purple)">Engajamento</span><h4>Puxar conversa</h4><p>Enquete, pergunta, "qual você prefere?". Faz a pessoa interagir.</p></div>
+    <div class="pillar"><span class="tag" style="background:var(--yellow-ink)">Oferta</span><h4>Chamar pra ação</h4><p>Promoção, últimas unidades, combo do dia. É a hora do "chama no direct".</p></div>
+  </div>
+  <div class="callout gold">
+    <div class="ttl">🌟 5º pilar: Bastidor</div>
+    <p>Mostre você preparando pedidos, embalando, o dia a dia. As pessoas compram de <b>pessoas</b>, não de lojas. Bastidor cria vínculo.</p>
+  </div>
+
+  <div class="callout pink">
+    <div class="ttl">📌 A regra de ouro</div>
+    <p>Toda postagem termina com um <b>convite claro</b>: "chama no direct", "responde essa enquete", "manda um oi". Post sem chamada é post que não vende.</p>
+  </div>
+
+  <div class="foot"><span class="fmark">Dree Maquiagem</span><span>Como usar</span><span>02</span></div>
+</section>
+
+<!-- CALENDÁRIO DIAS 1–15 -->
+<section class="page">
+  <div class="brandline"><b>Dree</b> Maquiagem · Planner de Postagens</div>
+  <div class="chapstart" style="margin-top:14px;">
+    <div class="ch-n">Calendário editorial</div>
+    <h2>Seus 30 dias · Semanas 1 e 2</h2>
+  </div>
+  <div class="legend">
+    <span><i class="dot" style="background:#8B4FC9"></i>Vitrine</span>
+    <span><i class="dot" style="background:#1E8A5B"></i>Prova</span>
+    <span><i class="dot" style="background:#E4148C"></i>Engajamento</span>
+    <span><i class="dot" style="background:#FFDD00"></i>Oferta</span>
+    <span><i class="dot" style="background:#2b4a8b"></i>Bastidor</span>
+  </div>
+  <table>
+    <thead><tr><th style="width:26px">Dia</th><th style="width:64px">Tipo</th><th style="width:150px">Ideia do post</th><th>Legenda pronta</th></tr></thead>
+    <tbody>
+      <tr><td><span class="d">1</span></td><td><span class="pill v">Vitrine</span></td><td>Apresente-se como revendedora</td><td class="cap">"Novidade por aqui! 💄 Agora eu trabalho com maquiagem e vou te mostrar cada coisinha linda que separei. Bora? Me segue 👇"</td></tr>
+      <tr><td><span class="d">2</span></td><td><span class="pill p">Prova</span></td><td>Você usando um produto</td><td class="cap">"Testei essa base hoje e olha esse acabamento 😍 Cobre e continua natural. Quer saber o tom? Chama aqui!"</td></tr>
+      <tr><td><span class="d">3</span></td><td><span class="pill e">Engaj.</span></td><td>Enquete de cor</td><td class="cap">"Me ajuda a decidir: batom vermelho 💋 ou nude 🤎? Responde aqui embaixo!"</td></tr>
+      <tr><td><span class="d">4</span></td><td><span class="pill o">Oferta</span></td><td>Combo da semana</td><td class="cap">"COMBO DA SEMANA 🔥 Batom + gloss por R$ 39. Tenho poucas unidades — chama no direct pra garantir!"</td></tr>
+      <tr><td><span class="d">5</span></td><td><span class="pill b">Bastidor</span></td><td>Embalando um pedido</td><td class="cap">"Preparando com carinho o pedido da [cliente] 💜 Cada caixinha vai com amor (e um mimo surpresa 🎁)."</td></tr>
+      <tr><td><span class="d">6</span></td><td><span class="pill v">Vitrine</span></td><td>Paleta em destaque</td><td class="cap">"Uma paleta, mil looks ✨ Do trabalho à balada. Qual look você faria primeiro?"</td></tr>
+      <tr><td><span class="d">7</span></td><td><span class="pill p">Prova</span></td><td>Print de cliente feliz</td><td class="cap">"Recebi essa mensagem e meu dia ficou completo 🥹💜 Obrigada por confiar em mim!"</td></tr>
+      <tr><td><span class="d">8</span></td><td><span class="pill e">Engaj.</span></td><td>Caixa de perguntas</td><td class="cap">"Bora de #ResponderTudo! Manda sua dúvida de maquiagem que eu te ajudo 👇"</td></tr>
+      <tr><td><span class="d">9</span></td><td><span class="pill v">Vitrine</span></td><td>Foco em um batom</td><td class="cap">"A cor que ilumina o rosto na hora 💋 Esse tom some rápido. Já garante o seu!"</td></tr>
+      <tr><td><span class="d">10</span></td><td><span class="pill o">Oferta</span></td><td>Últimas unidades</td><td class="cap">"ÚLTIMAS 3 UNIDADES dessa base 🚨 Depois só na próxima remessa. Chama que eu separo no seu nome!"</td></tr>
+      <tr><td><span class="d">11</span></td><td><span class="pill p">Prova</span></td><td>Antes e depois</td><td class="cap">"O poder de uma boa maquiagem 😱 Antes ➡️ depois. Quer esse resultado? Eu te ajudo a escolher."</td></tr>
+      <tr><td><span class="d">12</span></td><td><span class="pill b">Bastidor</span></td><td>Sua rotina de revendedora</td><td class="cap">"Um dia na vida de quem revende Dree 💜 Organizando estoque, atendendo no Whats e amando cada venda."</td></tr>
+      <tr><td><span class="d">13</span></td><td><span class="pill e">Engaj.</span></td><td>Isso ou aquilo</td><td class="cap">"Responde rápido: gloss brilhoso ✨ ou batom matte 🥀? Comenta aqui!"</td></tr>
+      <tr><td><span class="d">14</span></td><td><span class="pill v">Vitrine</span></td><td>Kit presente</td><td class="cap">"Presente que toda mulher ama receber 🎁 Kit montado e pronto pra entregar. Quer um? Chama aqui!"</td></tr>
+      <tr><td><span class="d">15</span></td><td><span class="pill o">Oferta</span></td><td>Frete/entrega grátis do dia</td><td class="cap">"SÓ HOJE: entrega grátis aqui na região 🛵 Fecha seu pedido até 18h e recebe em casa!"</td></tr>
+    </tbody>
+  </table>
+  <div class="foot"><span class="fmark">Dree Maquiagem</span><span>Calendário · Dias 1–15</span><span>03</span></div>
+</section>
+
+<!-- CALENDÁRIO DIAS 16–30 -->
+<section class="page">
+  <div class="brandline"><b>Dree</b> Maquiagem · Planner de Postagens</div>
+  <div class="chapstart" style="margin-top:14px;">
+    <div class="ch-n">Calendário editorial</div>
+    <h2>Seus 30 dias · Semanas 3 e 4</h2>
+  </div>
+  <table>
+    <thead><tr><th style="width:26px">Dia</th><th style="width:64px">Tipo</th><th style="width:150px">Ideia do post</th><th>Legenda pronta</th></tr></thead>
+    <tbody>
+      <tr><td><span class="d">16</span></td><td><span class="pill p">Prova</span></td><td>Depoimento em vídeo/áudio</td><td class="cap">"Ó o que a [cliente] falou do batom 🥰 Prova real que aqui é qualidade. Quer sentir isso também?"</td></tr>
+      <tr><td><span class="d">17</span></td><td><span class="pill v">Vitrine</span></td><td>Produto do dia + preço</td><td class="cap">"Produto do dia 💄 Corretivo que disfarça olheira na hora, por R$ [valor]. Chama no direct!"</td></tr>
+      <tr><td><span class="d">18</span></td><td><span class="pill e">Engaj.</span></td><td>Dica de maquiagem</td><td class="cap">"DICA RÁPIDA ✨ Aplique o corretivo em triângulo embaixo do olho pra iluminar. Salva esse post!"</td></tr>
+      <tr><td><span class="d">19</span></td><td><span class="pill o">Oferta</span></td><td>Leve 2, pague menos</td><td class="cap">"Leve 2 batons e pague R$ [valor] 💋 Escolhe as cores e me chama. Promoção da semana!"</td></tr>
+      <tr><td><span class="d">20</span></td><td><span class="pill b">Bastidor</span></td><td>Por que você começou</td><td class="cap">"Comecei a revender por um motivo simples: [seu porquê] 💜 E hoje amo ajudar mulheres a se sentirem lindas."</td></tr>
+      <tr><td><span class="d">21</span></td><td><span class="pill p">Prova</span></td><td>Você pronta pra sair</td><td class="cap">"Maquiada com os produtos que eu mesma vendo 💄 Tudo o que uso, você pode ter também. Pergunta aí!"</td></tr>
+      <tr><td><span class="d">22</span></td><td><span class="pill v">Vitrine</span></td><td>Novidade que chegou</td><td class="cap">"CHEGOU COISA NOVA 👀 Olha essa paleta que é puro luxo. Quer ver de pertinho? Chama aqui!"</td></tr>
+      <tr><td><span class="d">23</span></td><td><span class="pill e">Engaj.</span></td><td>Enquete de rotina</td><td class="cap">"Você se maquia todo dia ou só em ocasiões? 💄 Responde que eu tenho produto pros dois times!"</td></tr>
+      <tr><td><span class="d">24</span></td><td><span class="pill o">Oferta</span></td><td>Cupom pra seguidores</td><td class="cap">"Presente pra quem me acompanha 🎁 Diz 'vi no story' e ganha R$ [valor] de desconto hoje!"</td></tr>
+      <tr><td><span class="d">25</span></td><td><span class="pill p">Prova</span></td><td>Cliente usando o produto</td><td class="cap">"Amei ver a [cliente] arrasando com o batom que ela comprou aqui 😍 É ou não é linda?"</td></tr>
+      <tr><td><span class="d">26</span></td><td><span class="pill b">Bastidor</span></td><td>Organizando o estoque</td><td class="cap">"Sextou organizando as belezuras 💜 Tudo separadinho pra te atender rapidinho. O que você vai querer?"</td></tr>
+      <tr><td><span class="d">27</span></td><td><span class="pill v">Vitrine</span></td><td>Comparativo de tons</td><td class="cap">"3 tons de nude pra você escolher o seu 🤎 Qual combina mais com você? Te ajudo a decidir!"</td></tr>
+      <tr><td><span class="d">28</span></td><td><span class="pill e">Engaj.</span></td><td>Pergunta que gera venda</td><td class="cap">"Se eu te desse R$ 50 pra gastar aqui, o que você levava? 👀 Comenta que eu monto seu kit!"</td></tr>
+      <tr><td><span class="d">29</span></td><td><span class="pill o">Oferta</span></td><td>Fecha o mês com promo</td><td class="cap">"Última chamada do mês 🔥 Fechando pedido hoje, ganha um brinde surpresa. Corre no direct!"</td></tr>
+      <tr><td><span class="d">30</span></td><td><span class="pill p">Prova</span></td><td>Agradecimento + recap</td><td class="cap">"Mês incrível graças a você 💜 Obrigada a cada cliente que confiou. Bora pro próximo com tudo!"</td></tr>
+    </tbody>
+  </table>
+  <div class="callout gold">
+    <div class="ttl">🔁 Acabou o mês?</div>
+    <p>Recomece o ciclo trocando os produtos e as cores. As pessoas não decoram suas legendas — e o que funciona, repete-se.</p>
+  </div>
+  <div class="foot"><span class="fmark">Dree Maquiagem</span><span>Calendário · Dias 16–30</span><span>04</span></div>
+</section>
+
+<!-- BANCO DE GANCHOS + CTAs -->
+<section class="page">
+  <div class="brandline"><b>Dree</b> Maquiagem · Planner de Postagens</div>
+  <div class="chapstart" style="margin-top:14px;">
+    <div class="ch-n">Kit de emergência</div>
+    <h2>Banco de ganchos e chamadas</h2>
+    <p class="lead">Travou e não tem ideia? Escolha um gancho, junte a uma foto de produto e pronto — post no ar em 2 minutos.</p>
+  </div>
+
+  <h3>20 ganchos pra primeira linha do post</h3>
+  <div class="bank">
+    <div class="col">
+      <ul>
+        <li>"Ninguém te contou isso sobre maquiagem…"</li>
+        <li>"O erro que faz sua make derreter até o meio-dia"</li>
+        <li>"Chegou coisa nova e eu não aguentei esperar 👀"</li>
+        <li>"Se você tem só R$ 30, compre ISSO"</li>
+        <li>"O batom que some da minha caixa toda semana"</li>
+        <li>"Antes ➡️ depois (você não vai acreditar)"</li>
+        <li>"Presente perfeito por menos de R$ [valor]"</li>
+        <li>"Para de gastar à toa em maquiagem, faz assim"</li>
+        <li>"Testei por você — pode confiar"</li>
+        <li>"A pergunta que mais recebo no direct"</li>
+      </ul>
+    </div>
+    <div class="col">
+      <ul>
+        <li>"Essa cor combina com TODO tom de pele"</li>
+        <li>"3 motivos pra comprar comigo e não na loja"</li>
+        <li>"Última chance dessa promoção 🚨"</li>
+        <li>"O kit que transforma iniciante em pró"</li>
+        <li>"Você faz maquiagem certo? Vem ver"</li>
+        <li>"Minha cliente pediu, eu mostro pra você"</li>
+        <li>"Isso aqui vende sozinho, olha só"</li>
+        <li>"Segredo pra make durar o dia inteiro"</li>
+        <li>"Adivinha o que chegou hoje 🎁"</li>
+        <li>"Quem me acompanha ganha vantagem 💜"</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Chamadas pra ação (CTA) prontas</h3>
+  <div class="callout pink">
+    <p style="margin:0">Termine sempre com uma: <b>"Chama no direct 💬"</b> · <b>"Responde essa enquete 👆"</b> · <b>"Comenta 'EU QUERO' 👇"</b> · <b>"Manda um oi que eu te mostro tudo"</b> · <b>"Salva esse post pra não esquecer"</b> · <b>"Marca uma amiga que ia amar 💜"</b> · <b>"Link do Whats na bio"</b></p>
+  </div>
+
+  <div class="callout gold">
+    <div class="ttl">⏰ Melhores horários pra postar</div>
+    <p>Feed/stories: <b>por volta de 12h e 19h</b>. Status do WhatsApp: <b>manhã (8h) e noite (20h)</b>, quando as pessoas mais olham. Teste e veja o que funciona pro seu público.</p>
+  </div>
+
+  <div class="foot"><span class="fmark">Dree Maquiagem</span><span>Banco de ganchos</span><span>05</span></div>
+</section>
+
+<!-- PLANNER SEMANAL EM BRANCO -->
+<section class="page">
+  <div class="brandline"><b>Dree</b> Maquiagem · Planner de Postagens</div>
+  <div class="chapstart" style="margin-top:14px;">
+    <div class="ch-n">Sua vez</div>
+    <h2>Planner semanal em branco</h2>
+    <p class="lead">Imprima quantas vezes quiser. Planeje sua semana marcando o pilar de cada dia e a ideia do post.</p>
+  </div>
+
+  <div class="writeline"><div class="h">Semana de ___/___ a ___/___ · Meta da semana</div></div>
+
+  <table class="wk">
+    <thead><tr><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th><th>Dom</th></tr></thead>
+    <tbody>
+      <tr><td><span class="lbl">Pilar / ideia</span></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Anote suas melhores legendas</h3>
+  <div class="writeline"><div class="h">Post que mais deu resultado</div></div>
+  <div class="writeline"><div class="h">Ideia pra testar na próxima semana</div></div>
+  <div class="writeline"><div class="h">Produto pra dar destaque</div></div>
+
+  <div class="callout pink">
+    <div class="ttl">💜 Constância é tudo</div>
+    <p>Não precisa viralizar. Precisa <b>aparecer todo dia</b>. Marque um X no calendário a cada post publicado — e não quebre a corrente. É assim que a cliente lembra de você na hora de comprar.</p>
+  </div>
+
+  <div class="foot"><span class="fmark">Dree Maquiagem</span><span>Planner em branco</span><span>06</span></div>
+</section>
+
+</body>
+</html>

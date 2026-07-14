@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dree Maquiagem — Estratégia Completa: Do Kit à Primeira Venda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --purple:#580D9D; --purple-700:#440A79; --purple-300:#8B4FC9;
+    --magenta:#E4148C; --magenta-700:#B70E6F;
+    --yellow:#FFDD00; --yellow-ink:#3A2A00;
+    --wash:#F6F1FC; --wash-2:#EEE4F9; --line:#E9E2F1;
+    --ground:#FEFDFF; --ink:#1B1520; --muted:#6B6376;
+    --ok:#1E8A5B; --ok-soft:#E4F3EB;
+    --serif:"Poppins","Montserrat",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    --sans:"Montserrat",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+  body{margin:0; background:var(--wash); color:var(--ink); font-family:var(--sans); font-size:11pt; line-height:1.6; -webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4{font-family:var(--serif); font-weight:700; margin:0; letter-spacing:-0.015em; line-height:1.12;}
+  p{margin:0 0 11px;}
+  strong,b{font-weight:700;}
+  em{font-style:normal; color:var(--magenta-700); font-weight:700;}
+  ul,ol{margin:0 0 12px; padding-left:20px;}
+  li{margin:0 0 7px;}
+
+  /* ---- Page model ---- */
+  .page{
+    width:210mm; min-height:297mm; margin:0 auto 14px; background:var(--ground);
+    padding:26mm 22mm 24mm; position:relative; box-shadow:0 10px 40px rgba(88,13,157,.10);
+    display:flex; flex-direction:column;
+  }
+  .page + .page{margin-top:0;}
+
+  /* running footer */
+  .foot{position:absolute; left:22mm; right:22mm; bottom:12mm; display:flex; align-items:center; justify-content:space-between; font-size:8.5pt; color:var(--muted); letter-spacing:.04em;}
+  .foot b{color:var(--purple); font-family:var(--serif);}
+  .foot .fmark{text-transform:uppercase; letter-spacing:.14em; font-weight:700;}
+
+  .brandline{color:var(--muted); font-size:9pt; font-weight:700; letter-spacing:.14em; text-transform:uppercase;}
+  .brandline b{color:var(--purple);}
+
+  /* ---- Cover ---- */
+  .cover{
+    background:
+      radial-gradient(120% 90% at 100% 0%, rgba(228,20,140,.30), transparent 55%),
+      radial-gradient(120% 90% at 0% 100%, rgba(255,221,0,.22), transparent 55%),
+      linear-gradient(160deg,#5b0fa2 0%, #440A79 60%, #350862 100%);
+    color:#fff; justify-content:space-between; padding:30mm 22mm;
+  }
+  .cover .top{display:flex; align-items:center; justify-content:space-between;}
+  .cover .logo{font-family:var(--serif); font-weight:800; font-size:22pt; color:#fff;}
+  .cover .logo span{color:var(--yellow);}
+  .cover .logo i{display:block; font-style:normal; font-family:var(--sans); font-weight:700; font-size:8pt; letter-spacing:.32em; text-transform:uppercase; color:rgba(255,255,255,.72); margin-top:2px;}
+  .cover .tagpill{border:1.5px solid rgba(255,255,255,.4); border-radius:999px; padding:7px 15px; font-size:8.5pt; font-weight:800; letter-spacing:.16em; text-transform:uppercase;}
+  .cover .mid{margin:auto 0;}
+  .cover .kicker{display:inline-block; background:var(--yellow); color:var(--yellow-ink); font-weight:800; font-size:9pt; letter-spacing:.14em; text-transform:uppercase; padding:8px 14px; border-radius:8px; margin-bottom:22px;}
+  .cover h1{font-size:40pt; line-height:1.02; font-weight:800; text-wrap:balance; margin-bottom:16px;}
+  .cover h1 em{color:var(--yellow); font-style:normal;}
+  .cover .sub{font-size:13pt; color:rgba(255,255,255,.9); max-width:34ch; line-height:1.45;}
+  .cover .bottom{border-top:1px solid rgba(255,255,255,.22); padding-top:16px; display:flex; align-items:flex-end; justify-content:space-between; gap:20px;}
+  .cover .bottom p{margin:0; font-size:10pt; color:rgba(255,255,255,.82);}
+  .cover .bottom .who{font-family:var(--serif); font-weight:700; font-size:12pt; color:#fff;}
+  .cover .seals{display:flex; gap:8px; flex-wrap:wrap;}
+  .cover .seal{border:1px solid rgba(255,255,255,.35); border-radius:999px; padding:6px 12px; font-size:8pt; font-weight:700; letter-spacing:.05em;}
+
+  /* ---- Section header (chapter opener band) ---- */
+  .chapstart{border-left:5px solid var(--magenta); padding:2px 0 2px 16px; margin:0 0 18px;}
+  .chapstart .ch-n{font-size:9pt; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:var(--magenta);}
+  .chapstart h2{font-size:23pt; margin-top:6px; color:var(--purple-700);}
+  .chapstart .lead{margin-top:10px; color:var(--muted); font-size:11pt; max-width:60ch;}
+
+  h3{font-size:14pt; color:var(--purple); margin:20px 0 9px;}
+  h4{font-size:11.5pt; color:var(--ink); margin:14px 0 6px;}
+
+  /* ---- Components ---- */
+  .lead-p{font-size:11.5pt;}
+  .callout{background:var(--wash); border:1px solid var(--line); border-left:4px solid var(--purple); border-radius:12px; padding:14px 16px; margin:14px 0;}
+  .callout.pink{border-left-color:var(--magenta); background:#fdf0f8;}
+  .callout.gold{border-left-color:var(--yellow); background:#fffbe6;}
+  .callout .ttl{font-family:var(--serif); font-weight:700; font-size:10.5pt; color:var(--purple-700); margin-bottom:5px; display:flex; align-items:center; gap:8px;}
+  .callout.pink .ttl{color:var(--magenta-700);}
+  .callout p:last-child{margin-bottom:0;}
+
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:12px 0;}
+  .card{background:var(--wash); border:1px solid var(--line); border-radius:12px; padding:14px 15px;}
+  .card .cn{width:26px; height:26px; border-radius:50%; background:var(--purple); color:#fff; font-family:var(--serif); font-weight:800; font-size:11pt; display:flex; align-items:center; justify-content:center; margin-bottom:9px;}
+  .card h4{margin:0 0 5px;}
+  .card p{font-size:10pt; color:var(--muted); margin:0;}
+
+  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:10pt;}
+  th,td{text-align:left; padding:9px 11px; border-bottom:1px solid var(--line);}
+  th{background:var(--purple); color:#fff; font-family:var(--serif); font-weight:700; font-size:9.5pt; letter-spacing:.02em;}
+  tr:nth-child(even) td{background:var(--wash);}
+  td.num{text-align:right; font-variant-numeric:tabular-nums; font-weight:700;}
+  .tfoot td{background:var(--yellow)!important; color:var(--yellow-ink); font-weight:800;}
+
+  .check{list-style:none; padding:0; margin:12px 0;}
+  .check li{position:relative; padding:9px 12px 9px 40px; border:1px solid var(--line); border-radius:10px; margin-bottom:8px; background:#fff; font-size:10.5pt;}
+  .check li::before{content:""; position:absolute; left:12px; top:50%; transform:translateY(-50%); width:18px; height:18px; border-radius:5px; border:2px solid var(--purple-300);}
+
+  .steps{counter-reset:st; list-style:none; padding:0; margin:12px 0;}
+  .steps li{position:relative; padding:2px 0 14px 42px; margin:0;}
+  .steps li::before{counter-increment:st; content:counter(st); position:absolute; left:0; top:0; width:28px; height:28px; border-radius:50%; background:var(--magenta); color:#fff; font-family:var(--serif); font-weight:800; font-size:11pt; display:flex; align-items:center; justify-content:center;}
+  .steps li::after{content:""; position:absolute; left:13px; top:30px; bottom:2px; width:2px; background:var(--line);}
+  .steps li:last-child::after{display:none;}
+  .steps li b{color:var(--purple-700);}
+
+  .script{background:#faf6ff; border:1px dashed var(--purple-300); border-radius:12px; padding:14px 16px; margin:12px 0; font-size:10.5pt;}
+  .script .who{font-weight:800; color:var(--magenta-700); font-size:9pt; letter-spacing:.08em; text-transform:uppercase; margin-bottom:4px;}
+  .script p{margin:0 0 12px;}
+  .script p:last-child{margin-bottom:0;}
+
+  .stat-row{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:14px 0;}
+  .stat{background:linear-gradient(160deg,#5b0fa2,#440A79); color:#fff; border-radius:14px; padding:16px; text-align:center;}
+  .stat .big{font-family:var(--serif); font-weight:800; font-size:22pt; line-height:1; color:var(--yellow);}
+  .stat .lbl{font-size:8.5pt; letter-spacing:.06em; text-transform:uppercase; color:rgba(255,255,255,.85); margin-top:7px;}
+
+  .toc{list-style:none; padding:0; margin:18px 0 0;}
+  .toc li{display:flex; align-items:baseline; gap:10px; padding:11px 0; border-bottom:1px solid var(--line);}
+  .toc .tn{width:30px; height:30px; flex:none; border-radius:8px; background:var(--wash-2); color:var(--purple); font-family:var(--serif); font-weight:800; display:flex; align-items:center; justify-content:center; font-size:11pt;}
+  .toc .tt{font-family:var(--serif); font-weight:700; font-size:11.5pt; color:var(--ink);}
+  .toc .td{display:block; font-family:var(--sans); font-weight:500; font-size:9pt; color:var(--muted); margin-top:1px;}
+
+  .divider{height:3px; width:52px; background:var(--magenta); border-radius:99px; margin:2px 0 16px;}
+
+  @media print{
+    body{background:#fff;}
+    .page{margin:0; box-shadow:none; page-break-after:always; break-after:page; min-height:auto; height:297mm; overflow:hidden;}
+    .page:last-child{page-break-after:auto;}
+    .noprint{display:none!important;}
+  }
+  @page{size:A4; margin:0;}
+
+  /* screen helper bar */
+  .bar{position:fixed; top:16px; right:16px; z-index:50; display:flex; gap:8px;}
+  .bar button{font-family:var(--sans); font-weight:800; font-size:10pt; border:none; border-radius:999px; padding:11px 18px; cursor:pointer; box-shadow:0 6px 20px rgba(88,13,157,.28);}
+  .bar .print{background:var(--magenta); color:#fff;}
+</style>
+</head>
+<body>
+
+<div class="bar noprint">
+  <button class="print" onclick="window.print()">⬇ Baixar / Imprimir PDF</button>
+</div>
+
+<!-- ============ CAPA ============ -->
+<section class="page cover">
+  <div class="top">
+    <div class="logo">Dree<span>.</span><i>Maquiagem</i></div>
+    <div class="tagpill">Guia Oficial de Revenda</div>
+  </div>
+  <div class="mid">
+    <span class="kicker">Estratégia Completa</span>
+    <h1>Do Kit à <em>Primeira Venda</em> em 7 Dias</h1>
+    <p class="sub">O plano de ação passo a passo para você transformar seu kit de maquiagem em uma renda real — mesmo começando do zero e sem aparecer.</p>
+  </div>
+  <div class="bottom">
+    <div>
+      <p class="who">Método Dree de Revenda</p>
+      <p>E-book prático · Edição 2025</p>
+    </div>
+    <div class="seals">
+      <div class="seal">Scripts prontos</div>
+      <div class="seal">Tabela de lucro</div>
+      <div class="seal">Plano de 30 dias</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BOAS-VINDAS + SUMÁRIO ============ -->
+<section class="page">
+  <div class="brandline"><b>Dree</b> Maquiagem · Estratégia Completa</div>
+  <h2 style="font-size:22pt; color:var(--purple-700); margin-top:14px;">Bem-vinda ao seu novo negócio 💜</h2>
+  <div class="divider"></div>
+  <p class="lead-p">Você não comprou só um kit de maquiagem. Você comprou um <em>ponto de partida</em>. A partir de agora, cada batom, cada base e cada paleta dentro da sua caixa é estoque — e estoque parado não gera lucro, estoque que gira gera renda.</p>
+  <p>Este guia foi feito para uma pessoa específica: a mulher que quer vender, mas trava porque acha que "não sabe como", "não tem clientes" ou "tem vergonha de oferecer". Se é você, respira. Aqui não tem teoria enrolada. Tem um caminho, na ordem certa, com o que falar, quando falar e para quem falar.</p>
+
+  <div class="callout gold">
+    <div class="ttl">🎯 Como usar este e-book</div>
+    <p>Não leia tudo de uma vez e depois esqueça. Leia um capítulo e <b>execute a ação daquele capítulo no mesmo dia</b>. O último capítulo é um cronograma de 7 e 30 dias — imprima e cole na parede.</p>
+  </div>
+
+  <h3>O que você vai encontrar aqui</h3>
+  <ol class="toc">
+    <li><span class="tn">1</span><span><span class="tt">Mentalidade de vendedora</span><span class="td">Os 3 travamentos que fazem 90% desistir — e como virar a chave.</span></span></li>
+    <li><span class="tn">2</span><span><span class="tt">Conheça seu estoque como especialista</span><span class="td">Transforme cada produto do kit em um argumento de venda.</span></span></li>
+    <li><span class="tn">3</span><span><span class="tt">Precificação e lucro</span><span class="td">Fórmula de preço, margem e a tabela de quanto você ganha.</span></span></li>
+    <li><span class="tn">4</span><span><span class="tt">Sua vitrine digital</span><span class="td">Perfil, WhatsApp e catálogo que vendem por você 24h.</span></span></li>
+    <li><span class="tn">5</span><span><span class="tt">Onde estão suas clientes</span><span class="td">7 fontes de clientes que você já tem e não percebeu.</span></span></li>
+    <li><span class="tn">6</span><span><span class="tt">Scripts de venda no WhatsApp</span><span class="td">Abordagem, oferta, quebra de objeção e fechamento.</span></span></li>
+    <li><span class="tn">7</span><span><span class="tt">Pós-venda e recompra</span><span class="td">Como uma cliente vira 5 vendas ao longo do ano.</span></span></li>
+    <li><span class="tn">8</span><span><span class="tt">Seu plano de ação (7 e 30 dias)</span><span class="td">O cronograma que você segue a partir de hoje.</span></span></li>
+  </ol>
+
+  <div class="foot"><span class="fmark">Dree Maquiagem</span><span>Bem-vinda</span><span><b>02</b></span></div>
+</section>
+
+<!-- ============ CAP 1 — MENTALIDADE ============ -->
+<section class="page">
+  <div class="chapstart">
+    <div class="ch-n">Capítulo 1</div>
+    <h2>Mentalidade de vendedora</h2>
+    <p class="lead">Antes de qualquer batom sair da caixa, a venda acontece na sua cabeça. Vamos destravar isso primeiro.</p>
+  </div>
+
+  <p class="lead-p">A maioria não fracassa por falta de produto — fracassa por três pensamentos que sabotam antes de começar. Reconheça o seu:</p>
+
+  <div class="grid2">
+    <div class="card"><div class="cn">1</div><h4>"Vão achar que estou pedindo dinheiro"</h4><p>Você não pede — você oferece uma solução que a pessoa já queria. Maquiagem não é gasto, é autoestima.</p></div>
+    <div class="card"><div class="cn">2</div><h4>"Não tenho clientes"</h4><p>Você já conhece mais de 200 pessoas entre WhatsApp e redes. A cliente não falta — falta a oferta chegar até ela.</p></div>
+    <div class="card"><div class="cn">3</div><h4>"Preciso de um perfil perfeito"</h4><p>Não precisa. Precisa de um perfil claro e de constância. Perfeição depois, venda agora.</p></div>
+  </div>
+
+  <div class="callout pink">
+    <div class="ttl">💬 A frase que muda tudo</div>
+    <p>"Eu não estou incomodando — estou dando a chance de alguém se sentir bonita e resolver um problema que ela teria que sair de casa para resolver." Repita isso antes de cada abordagem.</p>
+  </div>
+
+  <h3>As 3 verdades da revendedora que lucra</h3>
+  <ul class="steps">
+    <li><b>Venda é serviço, não favor.</b> Quem compra de você ganha comodidade, atendimento e curadoria. Você entrega valor — cobre por ele sem culpa.</li>
+    <li><b>Constância vence talento.</b> Postar e oferecer todo dia, mesmo sem venda imediata, é o que constrói a renda. 15 minutos por dia batem "um dia inteiro quando der".</li>
+    <li><b>Não é sobre você, é sobre ela.</b> Pare de pensar "será que querem?" e comece a pensar "quem precisa disso hoje?". A venda fica leve.</li>
+  </ul>
+
+  <div class="callout gold">
+    <div class="ttl">✅ Ação do Capítulo 1</div>
+    <p>Escreva num papel: <b>"Hoje eu sou revendedora Dree."</b> Tire uma foto do seu kit e mande no seu status agora — sem preço, só a legenda "Chegou coisa nova por aqui 👀". Isso é o seu primeiro movimento.</p>
+  </div>
+
+  <div class="foot"><span class="fmark">Dree Maquiagem</span><span>Cap. 1 · Mentalidade</span><span><b>03</b></span></div>
+</section>
+
+<!-- ============ CAP 2 — CONHEÇA O ESTOQUE ============ -->
+<section class="page">
+  <div class="chapstart">
+    <div class="ch-n">Capítulo 2</div>
+    <h2>Conheça seu estoque como especialista</h2>
+    <p class="lead">Ninguém compra de quem gagueja. Quando você domina o que vende, o preço para de ser um problema.</p>
+  </div>
+
+  <p class="lead-p">Antes de vender, abra sua caixa e faça um <em>inventário</em>. Para cada produto, você precisa saber responder três coisas na ponta da língua: <b>o que é, para quem é e qual problema resolve</b>. Isso é o que separa a "moça que revende" da "consultora que a cliente confia".</p>
+
+  <h3>Monte a ficha de cada produto</h3>
+  <table>
+    <thead><tr><th>Produto</th><th>Para quem</th><th>Frase que vende</th></tr></thead>
+    <tbody>
+      <tr><td>Base / corretivo</td><td>Quem quer pele uniforme sem parecer "pesado"</td><td>"Cobre e continua natural, dura o dia todo."</td></tr>
+      <tr><td>Batom / gloss</td><td>Presente fácil e recompra rápida</td><td>"A cor que ilumina o rosto na hora."</td></tr>
+      <tr><td>Paleta de sombras</td><td>Quem quer versátil: do dia à balada</td><td>"Vários looks numa paleta só."</td></tr>
+      <tr><td>Kit completo</td><td>Iniciante ou presente</td><td>"Tudo pronto pra se maquiar sem erro."</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <div class="ttl">🔍 Faça o teste você mesma</div>
+    <p>Use os produtos no seu próprio rosto antes de vender. Uma foto <b>sua</b> usando o batom vende 10x mais do que a foto do fabricante. Vira prova real: "olha como fica em mim".</p>
+  </div>
+
+  <h3>Os 3 gatilhos de valor que você vai usar sempre</h3>
+  <div class="grid2">
+    <div class="card"><div class="cn">A</div><h4>Comodidade</h4><p>"Chega na sua casa / no seu trabalho, sem fila e sem sair de casa."</p></div>
+    <div class="card"><div class="cn">B</div><h4>Curadoria</h4><p>"Eu testei e separei o que realmente vale — você não erra na compra."</p></div>
+    <div class="card"><div class="cn">C</div><h4>Relacionamento</h4><p>"Qualquer dúvida você fala comigo, não com um robô de loja."</p></div>
+  </div>
+
+  <div class="callout gold">
+    <div class="ttl">✅ Ação do Capítulo 2</div>
+    <p>Faça a ficha (produto → para quem → frase) de <b>todos</b> os itens do seu kit. Guarde no bloco de notas do celular. Isso vira seu roteiro de resposta rápida quando alguém perguntar.</p>
+  </div>
+
+  <div class="foot"><span class="fmark">Dree Maquiagem</span><span>Cap. 2 · Estoque</span><span><b>04</b></span></div>
+</section>
+
+<!-- ============ CAP 3 — PRECIFICAÇÃO ============ -->
+<section class="page">
+  <div class="chapstart">
+    <div class="ch-n">Capítulo 3</div>
+    <h2>Precificação e lucro</h2>
+    <p class="lead">Aqui está o coração do negócio: quanto cobrar, quanto sobra e como não vender no prejuízo por medo.</p>
+  </div>
+
+  <p class="lead-p">A regra de ouro da revenda: o preço de venda cobre o <b>custo do produto + sua margem de lucro</b>. Para maquiagem revendida, uma margem saudável costuma ficar entre <em>80% e 120%</em> sobre o custo. Ou seja: se pagou R$ 20 num item, venda entre R$ 36 e R$ 44.</p>
+
+  <div class="callout pink">
+    <div class="ttl">🧮 A fórmula simples</div>
+    <p><b>Preço de venda = Custo ÷ (1 − margem desejada)</b><br>Exemplo: custo R$ 20, margem de 50% do preço → 20 ÷ (1 − 0,50) = <b>R$ 40</b>. Metade é seu lucro.</p>
+  </div>
+
+  <h3>Tabela de exemplo — quanto você lucra</h3>
+  <table>
+    <thead><tr><th>Item</th><th class="num">Custo</th><th class="num">Venda</th><th class="num">Lucro</th></tr></thead>
+    <tbody>
+      <tr><td>Batom</td><td class="num">R$ 12</td><td class="num">R$ 25</td><td class="num">R$ 13</td></tr>
+      <tr><td>Base</td><td class="num">R$ 28</td><td class="num">R$ 55</td><td class="num">R$ 27</td></tr>
+      <tr><td>Paleta de sombras</td><td class="num">R$ 35</td><td class="num">R$ 69</td><td class="num">R$ 34</td></tr>
+      <tr><td>Gloss</td><td class="num">R$ 10</td><td class="num">R$ 22</td><td class="num">R$ 12</td></tr>
+      <tr><td>Kit presente (3 itens)</td><td class="num">R$ 55</td><td class="num">R$ 119</td><td class="num">R$ 64</td></tr>
+    </tbody>
+    <tfoot><tr class="tfoot"><td>Vendendo o kit inteiro no mês</td><td class="num">—</td><td class="num">—</td><td class="num">R$ 150+</td></tr></tfoot>
+  </table>
+
+  <div class="stat-row">
+    <div class="stat"><div class="big">2x</div><div class="lbl">Multiplique o custo (regra rápida)</div></div>
+    <div class="stat"><div class="big">R$5</div><div class="lbl">Frete/combinado: cobre à parte</div></div>
+    <div class="stat"><div class="big">10%</div><div class="lbl">Desconto máximo p/ fechar na hora</div></div>
+  </div>
+
+  <h3>3 regras para nunca vender no prejuízo</h3>
+  <ul class="steps">
+    <li><b>Nunca dê desconto sem contrapartida.</b> Se abaixar, peça algo: "faço por R$ X se você levar 2" ou "se me indicar uma amiga".</li>
+    <li><b>Combos vendem mais e protegem a margem.</b> "Batom + gloss por R$ 39" parece vantagem para a cliente e aumenta seu ticket.</li>
+    <li><b>Frete e maquininha entram na conta.</b> Se aceita cartão, o valor da taxa (±4%) já deve estar embutido no preço.</li>
+  </ul>
+
+  <div class="callout gold">
+    <div class="ttl">✅ Ação do Capítulo 3</div>
+    <p>Monte sua <b>própria tabela de preços</b> agora, item por item, usando a fórmula. Salve como imagem no celular — é o que você envia quando alguém pergunta "quanto tá?".</p>
+  </div>
+
+  <div class="foot"><span class="fmark">Dree Maquiagem</span><span>Cap. 3 · Preço &amp; lucro</span><span><b>05</b></span></div>
+</section>
+
+<!-- ============ CAP 4 — VITRINE ============ -->
+<section class="page">
+  <div class="chapstart">
+    <div class="ch-n">Capítulo 4</div>
+    <h2>Sua vitrine digital</h2>
+    <p class="lead">Seu perfil e seu WhatsApp trabalham por você 24 horas. Vamos deixá-los prontos para vender sozinhos.</p>
+  </div>
+
+  <h3>Instagram / perfil que converte</h3>
+  <ul class="check">
+    <li><b>Nome do perfil:</b> "Seu Nome · Maquiagem" (ajuda a aparecer na busca).</li>
+    <li><b>Bio direta:</b> o que vende + para quem + como comprar. Ex.: "💄 Maquiagem que chega na sua casa · Entrega em [sua cidade] · Chama no Whats 👇".</li>
+    <li><b>Botão / link do WhatsApp</b> fixo na bio.</li>
+    <li><b>Destaques (stories fixos):</b> Catálogo · Preços · Como comprar · Clientes felizes.</li>
+    <li><b>Foto de capa/perfil</b> com seu rosto ou sua marca — gera confiança.</li>
+  </ul>
+
+  <h3>WhatsApp Business configurado</h3>
+  <div class="grid2">
+    <div class="card"><div class="cn">1</div><h4>Catálogo</h4><p>Cadastre cada produto com foto, nome e preço. A cliente navega sozinha.</p></div>
+    <div class="card"><div class="cn">2</div><h4>Mensagem de saudação</h4><p>Automática: "Oi! Que bom te ver por aqui 💜 Me diz o que você procura?"</p></div>
+    <div class="card"><div class="cn">3</div><h4>Respostas rápidas</h4><p>Atalhos para preço, formas de pagamento e prazo de entrega.</p></div>
+    <div class="card"><div class="cn">4</div><h4>Status diário</h4><p>É sua vitrine gratuita. Poste produto, prova e oferta todo dia.</p></div>
+  </div>
+
+  <div class="callout">
+    <div class="ttl">📸 Fotos que vendem (sem estúdio)</div>
+    <p>Luz natural perto da janela · fundo limpo (uma toalha branca resolve) · o produto na mão ou no rosto · uma foto = um produto. Simples e real vende mais que sofisticado e falso.</p>
+  </div>
+
+  <h3>O ritmo de conteúdo (a "regra dos 3")</h3>
+  <p>Todo dia, publique pelo menos 3 coisas no status/stories, alternando:</p>
+  <ul class="steps">
+    <li><b>Produto:</b> foto + frase que vende + preço.</li>
+    <li><b>Prova:</b> você usando, ou print de cliente satisfeita.</li>
+    <li><b>Oferta / chamada:</b> "Hoje tenho 4 unidades desse. Chama no direct pra garantir."</li>
+  </ul>
+
+  <div class="callout gold">
+    <div class="ttl">✅ Ação do Capítulo 4</div>
+    <p>Hoje: arrume a bio, ative o WhatsApp Business e poste seus 3 primeiros status. Amanhã já tem gente vendo sua vitrine.</p>
+  </div>
+
+  <div class="foot"><span class="fmark">Dree Maquiagem</span><span>Cap. 4 · Vitrine</span><span><b>06</b></span></div>
+</section>
+
+<!-- ============ CAP 5 — ONDE ESTÃO AS CLIENTES ============ -->
+<section class="page">
+  <div class="chapstart">
+    <div class="ch-n">Capítulo 5</div>
+    <h2>Onde estão suas clientes</h2>
+    <p class="lead">Você não precisa de tráfego pago para começar. Suas primeiras vendas estão a um clique de distância.</p>
+  </div>
+
+  <p class="lead-p">Existe uma ordem inteligente para prospectar: comece pelo <em>calor</em> (quem já te conhece e confia) e vá esfriando aos poucos. Ninguém começa por desconhecido.</p>
+
+  <h3>As 7 fontes de clientes que você já tem</h3>
+  <ul class="steps">
+    <li><b>Sua lista de WhatsApp.</b> Familiares, amigas, colegas. Um "oi" personalizado abre a primeira venda.</li>
+    <li><b>Grupos que você participa.</b> Família, trabalho, condomínio, escola dos filhos, igreja.</li>
+    <li><b>Seus seguidores atuais.</b> Quem já te segue e curte seus stories.</li>
+    <li><b>Indicações.</b> Toda cliente satisfeita conhece 3 que precisam. Sempre peça indicação.</li>
+    <li><b>Vizinhança e comércio local.</b> Salão, manicure, loja de roupa — parcerias de vitrine.</li>
+    <li><b>Datas comemorativas.</b> Dia das Mães, Namorados, Natal: maquiagem é presente campeão.</li>
+    <li><b>Marketplaces de bairro.</b> Grupos de "vende-se" e OLX/Enjoei da sua região.</li>
+  </ul>
+
+  <div class="callout pink">
+    <div class="ttl">🔥 A "Lista dos 30"</div>
+    <p>Escreva o nome de <b>30 pessoas</b> que você vai abordar nos próximos 3 dias. Não pule essa etapa — é a diferença entre "esperar cair venda" e ir buscar. 30 abordagens honestas costumam virar de 3 a 8 vendas.</p>
+  </div>
+
+  <h3>Como pedir indicação sem constrangimento</h3>
+  <div class="script">
+    <div class="who">Depois de uma venda ou elogio</div>
+    <p>"Fico tão feliz que você amou 💜 Se conhecer alguém que também ia gostar, me indica? Toda amiga que fecha comigo por sua indicação, eu te dou um mimo de agradecimento 🎁"</p>
+  </div>
+
+  <div class="callout gold">
+    <div class="ttl">✅ Ação do Capítulo 5</div>
+    <p>Monte sua <b>Lista dos 30</b> agora. Amanhã, capítulo 6, você recebe os scripts exatos para abordar cada uma sem parecer chata.</p>
+  </div>
+
+  <div class="foot"><span class="fmark">Dree Maquiagem</span><span>Cap. 5 · Clientes</span><span><b>07</b></span></div>
+</section>
+
+<!-- ============ CAP 6 — SCRIPTS ============ -->
+<section class="page">
+  <div class="chapstart">
+    <div class="ch-n">Capítulo 6</div>
+    <h2>Scripts de venda no WhatsApp</h2>
+    <p class="lead">Copie, cole e adapte. Aqui está exatamente o que falar em cada momento — da abordagem ao "pode mandar o pix".</p>
+  </div>
+
+  <h3>1. Abordagem (quebra o gelo, sem empurrar)</h3>
+  <div class="script">
+    <div class="who">Para quem já te conhece</div>
+    <p>"Oi [nome]! Tudo bem? 💜 Comecei a trabalhar com maquiagem e separei umas coisinhas lindas. Posso te mostrar 2 ou 3 que combinam com você? Sem compromisso 😊"</p>
+  </div>
+
+  <h3>2. Apresentação da oferta</h3>
+  <div class="script">
+    <div class="who">Quando ela responde "manda"</div>
+    <p>"Olha essa base 👉 [foto]. Ela cobre e continua super natural, dura o dia todo. Tá saindo por R$ 55, e se você levar com o batom que combina eu faço os dois por R$ 72. Qual tom é o seu?"</p>
+  </div>
+
+  <h3>3. Quebra de objeções</h3>
+  <table>
+    <thead><tr><th>Ela diz</th><th>Você responde</th></tr></thead>
+    <tbody>
+      <tr><td>"Tá caro"</td><td>"Entendo! Dá pra começar só pelo batom por R$ 25 — depois você leva o resto. Ou divido no cartão em 2x 😉"</td></tr>
+      <tr><td>"Vou pensar"</td><td>"Claro! Só te aviso que desse tom eu tenho só 2. Se quiser eu separo no seu nome até amanhã, sem compromisso 💜"</td></tr>
+      <tr><td>"Não tenho dinheiro agora"</td><td>"Sem problema! Quer que eu te avise no seu dia de pagamento? Anota aqui e a gente combina 😊"</td></tr>
+      <tr><td>"Compro na loja"</td><td>"Aqui você recebe em casa, testei todos e te ajudo a escolher — e sai pelo mesmo preço ou melhor. 💄"</td></tr>
+    </tbody>
+  </table>
+
+  <h3>4. Fechamento (a hora do sim)</h3>
+  <div class="script">
+    <div class="who">Feche com uma pergunta de escolha, não de sim/não</div>
+    <p>"Perfeito! Você prefere pagar por pix ou cartão? E a entrega fica melhor amanhã de manhã ou à tarde? 💜"</p>
+  </div>
+
+  <div class="callout pink">
+    <div class="ttl">⚡ Regra de ouro do fechamento</div>
+    <p>Nunca pergunte "vai querer?". Pergunte <b>"prefere A ou B?"</b>. As duas respostas levam à venda. Isso sozinho aumenta seu fechamento.</p>
+  </div>
+
+  <div class="callout gold">
+    <div class="ttl">✅ Ação do Capítulo 6</div>
+    <p>Salve os 4 scripts nas <b>respostas rápidas</b> do WhatsApp Business. Depois abra sua Lista dos 30 e envie a abordagem para as 5 primeiras <b>hoje</b>.</p>
+  </div>
+
+  <div class="foot"><span class="fmark">Dree Maquiagem</span><span>Cap. 6 · Scripts</span><span><b>08</b></span></div>
+</section>
+
+<!-- ============ CAP 7 — PÓS-VENDA ============ -->
+<section class="page">
+  <div class="chapstart">
+    <div class="ch-n">Capítulo 7</div>
+    <h2>Pós-venda e recompra</h2>
+    <p class="lead">Conquistar cliente nova custa caro. O ouro está em fazer quem já comprou voltar — de novo e de novo.</p>
+  </div>
+
+  <p class="lead-p">Uma cliente bem cuidada não compra uma vez: ela compra o batom hoje, a base no mês que vem e o kit de presente no fim do ano. E ainda te indica. <em>A recompra é onde o negócio vira renda de verdade.</em></p>
+
+  <h3>O ritual de pós-venda que fideliza</h3>
+  <ul class="steps">
+    <li><b>Na entrega:</b> um bilhetinho ou áudio de agradecimento. "Obrigada por confiar em mim 💜". Custa zero, marca muito.</li>
+    <li><b>3 dias depois:</b> "Oi [nome]! Como você tá se dando com a base? Ficou do jeitinho?" — mostra cuidado, não cobrança.</li>
+    <li><b>15–30 dias depois:</b> "Chegou um tom novo que é a sua cara, quer ver?" — abre a próxima venda de forma natural.</li>
+    <li><b>Datas especiais:</b> aniversário dela, Dia das Mães, Natal. "Separei uma coisinha pensando em você."</li>
+  </ul>
+
+  <div class="callout">
+    <div class="ttl">💜 Programa "amiga indica amiga"</div>
+    <p>Ofereça um brinde ou desconto para cada cliente que trouxer uma amiga. Uma cliente feliz é sua melhor vendedora — e não cobra comissão.</p>
+  </div>
+
+  <h3>Transforme prova social em vendas</h3>
+  <p>Toda vez que uma cliente elogiar, peça <b>autorização para repostar</b> o print ou uma foto dela usando. Nada vende maquiagem como ver uma pessoa real feliz com o resultado. Guarde tudo no destaque "Clientes felizes".</p>
+
+  <div class="stat-row">
+    <div class="stat"><div class="big">5x</div><div class="lbl">Mais barato vender p/ quem já comprou</div></div>
+    <div class="stat"><div class="big">3</div><div class="lbl">Indicações em média por cliente feliz</div></div>
+    <div class="stat"><div class="big">12</div><div class="lbl">Meses de recompra por cliente fiel</div></div>
+  </div>
+
+  <div class="callout gold">
+    <div class="ttl">✅ Ação do Capítulo 7</div>
+    <p>Crie uma agenda simples (o Planner Financeiro e o Planner Mensal que você recebeu ajudam nisso): anote o nome, o que comprou e a data de cada cliente. Programe o retorno de 3 e de 30 dias.</p>
+  </div>
+
+  <div class="foot"><span class="fmark">Dree Maquiagem</span><span>Cap. 7 · Pós-venda</span><span><b>09</b></span></div>
+</section>
+
+<!-- ============ CAP 8 — PLANO DE AÇÃO ============ -->
+<section class="page">
+  <div class="chapstart">
+    <div class="ch-n">Capítulo 8</div>
+    <h2>Seu plano de ação</h2>
+    <p class="lead">Chega de teoria. Este é o cronograma que você segue a partir de hoje. Imprima e risque cada item.</p>
+  </div>
+
+  <h3>🚀 Semana 1 — do zero à primeira venda</h3>
+  <ul class="check">
+    <li><b>Dia 1:</b> Inventário do kit + ficha de cada produto (Cap. 2).</li>
+    <li><b>Dia 2:</b> Monte sua tabela de preços com a fórmula (Cap. 3).</li>
+    <li><b>Dia 3:</b> Arrume bio, WhatsApp Business e catálogo (Cap. 4).</li>
+    <li><b>Dia 4:</b> Escreva sua Lista dos 30 (Cap. 5).</li>
+    <li><b>Dia 5:</b> Envie a abordagem para 10 pessoas da lista (Cap. 6).</li>
+    <li><b>Dia 6:</b> Poste 3 status/stories + envie para mais 10 pessoas.</li>
+    <li><b>Dia 7:</b> Feche suas primeiras vendas + peça indicação.</li>
+  </ul>
+
+  <h3>📅 Do dia 8 ao 30 — construindo a rotina</h3>
+  <ul class="steps">
+    <li><b>Todo dia (15 min):</b> 3 status + falar com 5 pessoas novas.</li>
+    <li><b>2x por semana:</b> uma oferta/combo especial no status.</li>
+    <li><b>1x por semana:</b> pós-venda de quem comprou (mensagem de 3 dias).</li>
+    <li><b>Fim de cada semana:</b> anote vendas e lucro no seu Planner Financeiro.</li>
+  </ul>
+
+  <div class="callout pink">
+    <div class="ttl">🎯 Sua meta dos 30 dias</div>
+    <p>Não mire "vender tudo". Mire <b>10 clientes fechadas e 30 conversas iniciadas</b>. Faça o processo — o resultado é consequência. Quem faz as ações, vende.</p>
+  </div>
+
+  <div class="callout gold">
+    <div class="ttl">💜 Você não está sozinha</div>
+    <p>Junto deste e-book você recebeu o <b>Planner de Ideias de Postagens</b>, o <b>Planner Financeiro</b> e o <b>Planner Mensal</b>. Use os três em conjunto: o de postagens te dá o que publicar, o financeiro mostra seu lucro e o mensal organiza suas metas. Agora é executar. Sua primeira venda está mais perto do que você imagina. 💄✨</p>
+  </div>
+
+  <div class="foot"><span class="fmark">Dree Maquiagem</span><span>Cap. 8 · Plano de ação</span><span><b>10</b></span></div>
+</section>
+
+</body>
+</html>
