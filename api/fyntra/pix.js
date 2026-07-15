@@ -1,5 +1,7 @@
 const DEFAULT_BASE_URL = 'https://api-gateway.fyntrabr.com';
 const DEFAULT_USER_AGENT = 'AtivoB2B/1.0';
+const BASE_AMOUNT_CENTS = 3700;
+const ORDER_BUMP_CENTS = 1290;
 
 function json(res, status, body) {
   res.statusCode = status;
@@ -121,18 +123,14 @@ module.exports = async function handler(req, res) {
     return json(res, 400, { message: 'Body JSON invalido.' });
   }
 
-  const amount = Number(payload.amount);
   const name = String(payload.name || '').trim();
   const email = String(payload.email || '').trim();
   const phone = onlyDigits(payload.phone);
   const document = onlyDigits(payload.document);
   const orderBump = Boolean(payload.orderBump);
+  const amount = BASE_AMOUNT_CENTS + (orderBump ? ORDER_BUMP_CENTS : 0);
   const address = payload.address || {};
   const tracking = payload.tracking && typeof payload.tracking === 'object' ? payload.tracking : {};
-
-  if (!Number.isInteger(amount) || amount <= 0) {
-    return json(res, 400, { message: 'Valor invalido para o PIX.' });
-  }
 
   if (!name || !email || phone.length < 10 || document.length !== 11) {
     return json(res, 400, { message: 'Preencha nome, email, WhatsApp e CPF corretamente.' });
@@ -186,14 +184,14 @@ module.exports = async function handler(req, res) {
     items: [
       {
         title: 'Frete e ativacao do Kit Loja de 10',
-        unitPrice: amount - (orderBump ? 1990 : 0),
+        unitPrice: amount - (orderBump ? ORDER_BUMP_CENTS : 0),
         quantity: 1,
         tangible: true,
         externalRef: 'dree-frete-ativacao'
       },
       ...(orderBump ? [{
         title: 'Embalagem rosa da marca',
-        unitPrice: 1990,
+        unitPrice: ORDER_BUMP_CENTS,
         quantity: 1,
         tangible: true,
         externalRef: 'dree-order-bump'
@@ -230,12 +228,12 @@ module.exports = async function handler(req, res) {
         products: [
           {
             name: 'Frete e ativacao do Kit Loja de 10',
-            price: (amount - (orderBump ? 1990 : 0)) / 100,
+            price: (amount - (orderBump ? ORDER_BUMP_CENTS : 0)) / 100,
             quantity: 1
           },
           ...(orderBump ? [{
             name: 'Embalagem rosa da marca',
-            price: 1990 / 100,
+            price: ORDER_BUMP_CENTS / 100,
             quantity: 1
           }] : [])
         ],
