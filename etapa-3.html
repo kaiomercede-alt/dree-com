@@ -700,6 +700,7 @@
 
   bump.addEventListener('change', function () {
     refresh();
+    trackLeadUpdate('order_bump', true);
     if (window.DreeMetrics) {
       window.DreeMetrics.track('order_bump_toggle', {
         checked: bump.checked,
@@ -751,6 +752,63 @@
   var cep = document.getElementById('cep');
   mask(cep, function (v) { v = onlyD(v).slice(0,8); return v.replace(/(\d{5})(\d)/,'$1-$2'); });
 
+  var leadTimer = null;
+  var lastLeadSnapshot = '';
+
+  function maskedCpf() {
+    var digits = onlyD(document.getElementById('cpf').value);
+    if (digits.length < 4) return '';
+    return '***.***.***-' + digits.slice(-2);
+  }
+
+  function leadPayload(reason) {
+    var fields = ['nome', 'email', 'whats', 'cpf', 'cep', 'rua', 'numero', 'bairro', 'cidade', 'uf'];
+    var filled = fields.filter(function (id) {
+      return String(document.getElementById(id).value || '').trim().length > 0;
+    });
+
+    return {
+      reason: reason || 'typing',
+      name: document.getElementById('nome').value.trim().slice(0, 120),
+      email: document.getElementById('email').value.trim().slice(0, 160),
+      phone: document.getElementById('whats').value.trim().slice(0, 40),
+      cpfMasked: maskedCpf(),
+      zipCode: document.getElementById('cep').value.trim().slice(0, 12),
+      city: document.getElementById('cidade').value.trim().slice(0, 80),
+      state: document.getElementById('uf').value.trim().slice(0, 2),
+      orderBump: bump.checked,
+      amount: totalAmount(),
+      filledFields: filled.join(','),
+      completionPct: Math.round((filled.length / fields.length) * 100)
+    };
+  }
+
+  function trackLeadUpdate(reason, immediate) {
+    if (!window.DreeMetrics) return;
+    clearTimeout(leadTimer);
+
+    var send = function () {
+      var payload = leadPayload(reason);
+      var snapshot = JSON.stringify(payload);
+      if (snapshot === lastLeadSnapshot) return;
+      lastLeadSnapshot = snapshot;
+      window.DreeMetrics.track('lead_update', payload);
+    };
+
+    if (immediate) {
+      send();
+      return;
+    }
+
+    leadTimer = setTimeout(send, 900);
+  }
+
+  form.querySelectorAll('input, select').forEach(function (field) {
+    field.addEventListener('input', function () { trackLeadUpdate('typing'); });
+    field.addEventListener('change', function () { trackLeadUpdate('change', true); });
+    field.addEventListener('blur', function () { trackLeadUpdate('blur', true); });
+  });
+
   // Autopreenche endereço pelo CEP (ViaCEP, best-effort)
   cep.addEventListener('blur', function () {
     var d = onlyD(cep.value);
@@ -763,6 +821,7 @@
       if (a.localidade) document.getElementById('cidade').value = a.localidade;
       if (a.uf) document.getElementById('uf').value = a.uf;
       document.getElementById('cepHint').textContent = 'Endereço preenchido. Confira o número.';
+      trackLeadUpdate('cep_autofill', true);
       document.getElementById('numero').focus();
     }).catch(function () { document.getElementById('cepHint').textContent = 'Preencha o endereço na mão.'; });
   });
@@ -809,9 +868,17 @@
     hideSubmitError();
     setLoading(true);
     if (window.DreeMetrics) {
+      trackLeadUpdate('checkout_submit', true);
       window.DreeMetrics.track('checkout_submit', {
         orderBump: bump.checked,
-        amount: totalAmount()
+        amount: totalAmount(),
+        name: document.getElementById('nome').value.trim().slice(0, 120),
+        email: document.getElementById('email').value.trim().slice(0, 160),
+        phone: document.getElementById('whats').value.trim().slice(0, 40),
+        city: document.getElementById('cidade').value.trim().slice(0, 80),
+        state: document.getElementById('uf').value.trim().slice(0, 2),
+        zipCode: document.getElementById('cep').value.trim().slice(0, 12),
+        completionPct: 100
       });
     }
 

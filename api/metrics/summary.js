@@ -53,6 +53,31 @@ function toTimestamp(value) {
   return Number.isFinite(time) ? time : 0;
 }
 
+function mergeLeadData(target, source) {
+  if (!source || typeof source !== 'object') return target;
+  const fields = [
+    'name',
+    'email',
+    'phone',
+    'cpfMasked',
+    'zipCode',
+    'city',
+    'state',
+    'orderBump',
+    'amount',
+    'filledFields',
+    'completionPct'
+  ];
+
+  for (const field of fields) {
+    if (source[field] !== undefined && source[field] !== null && source[field] !== '') {
+      target[field] = source[field];
+    }
+  }
+
+  return target;
+}
+
 function summarize(events) {
   const stageIndex = Object.fromEntries(STAGES.map((stage, index) => [stage.id, index]));
   const sessions = new Map();
@@ -61,6 +86,7 @@ function summarize(events) {
   const durations = Object.fromEntries(STAGES.map((stage) => [stage.id, []]));
   const durationKeys = new Set();
   const eventCounts = {};
+  const leadProfiles = new Map();
 
   for (const event of events) {
     const sessionId = event.sessionId || 'sem-sessao';
@@ -71,6 +97,37 @@ function summarize(events) {
 
     if (!sessions.has(sessionId)) sessions.set(sessionId, []);
     sessions.get(sessionId).push(event);
+
+    if (event.type === 'lead_update' || event.type === 'checkout_submit' || event.type === 'pix_generated' || event.type === 'payment_approved') {
+      if (!leadProfiles.has(sessionId)) {
+        leadProfiles.set(sessionId, {
+          sessionId,
+          visitorId: event.visitorId || '',
+          name: '',
+          email: '',
+          phone: '',
+          cpfMasked: '',
+          zipCode: '',
+          city: '',
+          state: '',
+          orderBump: false,
+          amount: 0,
+          filledFields: '',
+          completionPct: 0,
+          reached: stage,
+          lastEvent: event.type,
+          lastSeenAt: event.timestamp || '',
+          source: event.source || ''
+        });
+      }
+
+      const profile = leadProfiles.get(sessionId);
+      profile.visitorId = event.visitorId || profile.visitorId;
+      profile.lastEvent = event.type;
+      profile.lastSeenAt = event.timestamp || profile.lastSeenAt;
+      profile.source = event.source || profile.source;
+      mergeLeadData(profile, event.data);
+    }
 
     if (stageSessions[stage]) stageSessions[stage].add(sessionId);
     if (event.durationMs > 0 && durations[stage]) {
@@ -156,6 +213,24 @@ function summarize(events) {
     .sort((a, b) => toTimestamp(b.lastSeenAt) - toTimestamp(a.lastSeenAt))
     .slice(0, 30);
 
+  const recentLeads = Array.from(leadProfiles.values())
+    .map((lead) => {
+      const rowsForSession = sessions.get(lead.sessionId) || [];
+      const reached = rowsForSession.reduce((best, event) => {
+        return (stageIndex[event.stage] || 0) >= (stageIndex[best] || 0) ? event.stage : best;
+      }, 'checkout');
+
+      return {
+        ...lead,
+        reached,
+        hasContact: Boolean(lead.name || lead.email || lead.phone),
+        location: [lead.city, lead.state].filter(Boolean).join(' / ') || lead.zipCode || ''
+      };
+    })
+    .filter((lead) => lead.hasContact || Number(lead.completionPct || 0) > 0)
+    .sort((a, b) => toTimestamp(b.lastSeenAt) - toTimestamp(a.lastSeenAt))
+    .slice(0, 50);
+
   return {
     generatedAt: new Date().toISOString(),
     persistent: hasPersistentStore(),
@@ -170,6 +245,7 @@ function summarize(events) {
     bottleneck,
     slowest,
     eventCounts,
+    recentLeads,
     recentSessions
   };
 }

@@ -513,6 +513,29 @@
 
     <section class="panel table-panel">
       <div class="panel-head">
+        <h2>Leads no checkout</h2>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Lead</th>
+              <th>Contato</th>
+              <th>Localização</th>
+              <th>Progresso</th>
+              <th>Status</th>
+              <th>Última atividade</th>
+            </tr>
+          </thead>
+          <tbody id="leads">
+            <tr><td colspan="6">Carregando...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel table-panel">
+      <div class="panel-head">
         <h2>Sessões recentes</h2>
       </div>
       <div class="table-scroll">
@@ -583,6 +606,15 @@
     }).format(date);
   }
 
+  function escapeHtml(value) {
+    return String(value || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
   function showNotice(message, type) {
     notice.textContent = message;
     notice.className = 'notice show';
@@ -635,10 +667,39 @@
       return [
         '<tr>',
           '<td>' + stagePill(row.reached) + '</td>',
-          '<td>' + (row.lastEvent || '-') + '</td>',
-          '<td>' + (row.source || 'direto') + '</td>',
+          '<td>' + escapeHtml(row.lastEvent || '-') + '</td>',
+          '<td>' + escapeHtml(row.source || 'direto') + '</td>',
           '<td>' + fmtDate(row.lastSeenAt) + '</td>',
-          '<td>' + (row.sessionId || '').slice(0, 24) + '</td>',
+          '<td>' + escapeHtml((row.sessionId || '').slice(0, 24)) + '</td>',
+        '</tr>'
+      ].join('');
+    }).join('');
+  }
+
+  function renderLeads(rows) {
+    var body = document.getElementById('leads');
+    if (!rows || !rows.length) {
+      body.innerHTML = '<tr><td colspan="6">Nenhum dado de checkout capturado ainda.</td></tr>';
+      return;
+    }
+
+    body.innerHTML = rows.map(function (lead) {
+      var contact = [
+        lead.email ? '<div>' + escapeHtml(lead.email) + '</div>' : '',
+        lead.phone ? '<div>' + escapeHtml(lead.phone) + '</div>' : '',
+        lead.cpfMasked ? '<div>' + escapeHtml(lead.cpfMasked) + '</div>' : ''
+      ].filter(Boolean).join('');
+      var progress = fmtNumber(lead.completionPct || 0) + '%';
+      if (lead.orderBump) progress += ' · bump';
+
+      return [
+        '<tr>',
+          '<td><strong>' + escapeHtml(lead.name || 'Sem nome') + '</strong></td>',
+          '<td>' + (contact || '-') + '</td>',
+          '<td>' + escapeHtml(lead.location || '-') + '</td>',
+          '<td>' + escapeHtml(progress) + '</td>',
+          '<td>' + stagePill(lead.reached) + '<div class="stage-meta">' + escapeHtml(lead.lastEvent || '-') + '</div></td>',
+          '<td>' + fmtDate(lead.lastSeenAt) + '</td>',
         '</tr>'
       ].join('');
     }).join('');
@@ -674,6 +735,7 @@
     }
 
     renderFunnel(data.stages || []);
+    renderLeads(data.recentLeads || []);
     renderRecent(data.recentSessions || []);
   }
 
